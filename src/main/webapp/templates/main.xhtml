@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/core">
+<f:view contentType="text/html" />
+<h:head>
+    <title>Carat::Index</title>
+    <h:outputStylesheet library="css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="bootstrap-responsive.css" />
+    <h:outputStylesheet library="css" name="main.css" />
+
+    <h:outputScript library="js" name="bootstrap-affix.js"      target="body" />
+    <h:outputScript library="js" name="bootstrap-transition.js" target="body" />
+    <h:outputScript library="js" name="bootstrap-alert.js"      target="body" />
+    <h:outputScript library="js" name="bootstrap-button.js"     target="body" />
+    <h:outputScript library="js" name="bootstrap-collapse.js"   target="body" />
+    <h:outputScript library="js" name="bootstrap-dropdown.js"   target="body" />
+    <h:outputScript library="js" name="bootstrap-modal.js"      target="body" />
+    <h:outputScript library="js" name="bootstrap-tab.js"        target="body" />
+    <h:outputScript library="js" name="bootstrap-tooltip.js"    target="body" />
+    <h:outputScript library="js" name="bootstrap-typeahead.js"  target="body" />
+
+    <link rel="shortcut icon" type="image/png" href="resources/img/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</h:head>
+<h:body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar">1</span>
+                    <span class="icon-bar">2</span>
+                    <span class="icon-bar">3</span>
+                </button>
+                <a href="/" class="brand">Carat</a>
+                <div class="nav-collapse collapse">
+                    <p class="navbar-text pull-right">
+                        Logged in as <a href="#" class="navbar-link">Username</a>
+                    </p>
+                    <ul class="nav">
+                        <li class="">
+                            <a href="/">Home</a>
+                        </li>
+                        <li class="">
+                            <a href="/settings">Settings</a>
+                        </li>
+                        <li class="">
+                            <a href="/statistics">Statistics</a>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <ui:insert name="content"/>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <p>Designed and built by <a href="http://github.com/markash" target="_blank">mpashworth</a>.</p>
+                <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+                <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+                <ul class="footer-links">
+                    <li><a href="http://mpashworth.wordpress.com">Blog</a></li>
+                    <li class="muted"><h:outputText value="&amp;middot;" escape="false"/></li>
+                    <li><a href="https://github.com/markash/carat/issues?state=open">Issues</a></li>
+                    <li class="muted"><h:outputText value="&amp;middot;" escape="false" /></li>
+                    <li><a href="https://github.com/markash/carat/blob/master/CHANGELOG.md">Changelog</a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+</h:body>
+</html>

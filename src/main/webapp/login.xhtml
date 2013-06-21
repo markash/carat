@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+                template="/templates/main.xhtml">
+    <ui:define name="content">
+        <h2>Login</h2>
+        <h:form id="frmLogin">
+            <h:panelGrid columns="3" id="pnlContent">
+                <h:outputLabel for="username" value="Username:" />
+                <h:inputText id="username" required="true" />
+                <h:message for="username" />
+
+                <h:outputLabel for="password" value="Password" />
+                <h:inputSecret id="password" required="true" />
+                <h:message for="password" />
+
+                <h:outputLabel for="rememberMe" value="Remember Me" />
+                <h:selectBooleanCheckbox id="rememberMe" />
+                <h:panelGroup />
+
+                <h:panelGroup />
+                <h:commandButton value="Login" />
+                <h:panelGroup styleClass="error" rendered="#{not facesContext.validationFailed}">
+                    #{shiroLoginFailure}
+                </h:panelGroup>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>
