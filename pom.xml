@@ -50,10 +50,25 @@
             <!--<artifactId>org.eclipse.persistence.jpa</artifactId>-->
             <!--<version>2.5.0</version>-->
         <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.jdbi</groupId>-->
+            <!--<artifactId>jdbi</artifactId>-->
+            <!--<version>${dependency.jdbi.version}</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>org.jdbi</groupId>
-            <artifactId>jdbi</artifactId>
-            <version>${dependency.jdbi.version}</version>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-meta</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-codegen</artifactId>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -178,6 +193,121 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.hsqldb</groupId>
+                        <artifactId>hsqldb</artifactId>
+                        <version>2.2.9</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <driver>org.hsqldb.jdbc.JDBCDriver</driver>
+                    <url>jdbc:hsqldb:file:./target/carat-db;sql.enforce_strict_size=true;sql.syntax_pgs=true</url>
+                    <username>sa</username>
+                    <password></password>
+                    <srcFiles>
+                        <srcFile>src/main/resources/schema.sql</srcFile>
+                    </srcFiles>
+                </configuration>
+                <!--
+                <executions>
+                    <execution>
+                        <id>create-database</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/main/resources/schema.sql</srcFile>
+                            </srcFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+                -->
+            </plugin>
+            <plugin>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq-codegen-maven</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <jdbc>
+                        <driver>org.hsqldb.jdbc.JDBCDriver</driver>
+                        <url>jdbc:hsqldb:file:./target/carat-db;sql.enforce_strict_size=true;sql.syntax_pgs=true</url>
+                        <user>sa</user>
+                        <password></password>
+                    </jdbc>
+                    <generator>
+                        <name>org.jooq.util.JavaGenerator</name>
+                        <database>
+                            <name>org.jooq.util.hsqldb.HSQLDBDatabase</name>
+                            <includes>.*</includes>
+                            <excludes></excludes>
+                            <dateAsTimestamp>true</dateAsTimestamp>
+                            <inputSchema>PUBLIC</inputSchema>
+                        </database>
+                        <generate>
+                            <deprecated>false</deprecated>
+                            <instanceFields>true</instanceFields>
+                            <pojos>true</pojos>
+                        </generate>
+                        <target>
+                            <packageName>za.co.yellowfire.carat.db.h2</packageName>
+                            <directory>target/generated-sources/jooq-hsqldb</directory>
+                        </target>
+                    </generator>
+                </configuration>
+                <!--
+                <executions>
+                    <execution>
+                        <id>exec1</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <jdbc>
+                                <driver>org.hsqldb.jdbc.JDBCDriver</driver>
+                                <url>jdbc:hsqldb:hsql://localhost/carat-db</url>
+                                <user>sa</user>
+                                <password></password>
+                            </jdbc>
+                            <generator>
+                                <name>org.jooq.util.JavaGenerator</name>
+                                <database>
+                                    <name>org.jooq.util.hsqldb.HSQLDBDatabase</name>
+                                    <includes>.*</includes>
+                                    <excludes></excludes>
+                                    <dateAsTimestamp>true</dateAsTimestamp>
+                                    <inputSchema>PUBLIC</inputSchema>
+                                </database>
+                                <generate>
+                                    <deprecated>false</deprecated>
+                                    <instanceFields>true</instanceFields>
+                                    <pojos>true</pojos>
+                                </generate>
+                                <target>
+                                    <packageName>za.co.yellowfire.carat.db.h2</packageName>
+                                    <directory>target/generated-sources/jooq-hsqldb</directory>
+                                </target>
+                            </generator>
+                        </configuration>
+                    </execution>
+                </executions>
+                -->
+                <dependencies>
+                    <dependency>
+                        <groupId>org.hsqldb</groupId>
+                        <artifactId>hsqldb</artifactId>
+                        <version>2.2.9</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

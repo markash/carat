@@ -18,6 +18,9 @@ public interface ItemDao extends Closeable {
     @SqlUpdate("insert into item (value, version) values (:value, 1)")
     void insert(@Bind("value") String value);
 
+    @SqlQuery("select count(*) from item")
+    long find();
+
     @SqlQuery("select id, value, version from item")
     List<Item> findAll();
 

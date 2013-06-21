@@ -10,7 +10,7 @@ import javax.enterprise.inject.Produces;
 
 public class MetricsAdminServletContextListener extends AdminServletContextListener {
 
-    private final static MetricRegistry metricRegistry = new MetricRegistry();
+    protected final static MetricRegistry metricRegistry = new MetricRegistry();
     private final static JmxReporter reporter = JmxReporter.forRegistry(metricRegistry).build();
     private final static HealthCheckRegistry healthCheckRegistry = new HealthCheckRegistry();
 
