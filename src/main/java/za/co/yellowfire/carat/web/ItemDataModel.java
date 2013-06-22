@@ -1,12 +1,9 @@
 package za.co.yellowfire.carat.web;
 
-import za.co.yellowfire.carat.db.ItemDao;
-
 import javax.faces.model.DataModel;
 
 public class ItemDataModel extends DataModel {
 
-    private ItemDao dao;
 
     @Override
     public boolean isRowAvailable() {

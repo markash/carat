@@ -6,14 +6,9 @@ import za.co.yellowfire.carat.db.ItemDao;
 import za.co.yellowfire.carat.metrics.Metrics;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import java.io.Serializable;
 import java.util.List;
 
@@ -27,12 +22,9 @@ public class IndexController implements Serializable {
     private List<Item> items;
     private String name;
 
-    @Inject
-    @PostConstruct
+    @Inject @PostConstruct
     public void init(ItemDao dao) {
-        dao.createTable();
-        dao.insert("Test");
-        items = dao.findAll();
+        items = dao.getItems();
     }
 
     public String getName() {

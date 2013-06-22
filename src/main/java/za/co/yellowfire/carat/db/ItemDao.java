@@ -1,28 +1,37 @@
 package za.co.yellowfire.carat.db;
 
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
 
-import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
-import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
-
-import java.io.Closeable;
+import javax.annotation.Resource;
+import javax.inject.Named;
+import javax.sql.DataSource;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-@RegisterMapper(ItemMapper.class)
-public interface ItemDao extends Closeable {
+@Named
+public class ItemDao implements Serializable {
 
-    @SqlUpdate("create table if not exists item (id int identity primary key, value varchar(100), version int)")
-    void createTable();
+    @Resource(name = "jdbc/carat")
+    private DataSource dataSource;
 
-    @SqlUpdate("insert into item (value, version) values (:value, 1)")
-    void insert(@Bind("value") String value);
+    public List<Item> getItems() {
+        try {
+            DSLContext create = DSL.using(dataSource, SQLDialect.HSQLDB);
 
-    @SqlQuery("select count(*) from item")
-    long find();
-
-    @SqlQuery("select id, value, version from item")
-    List<Item> findAll();
-
-    void close();
+            List<Item> results = new ArrayList<Item>();
+            Result<Record> result = create.select().from("ITEM").fetch();
+            for (Record record : result) {
+                results.add(new Item(record));
+            }
+            return results;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
