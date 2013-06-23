@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS item (
-  id BIGINT IDENTITY NOT NULL PRIMARY KEY,
+  id SERIAL UNIQUE,
   value VARCHAR(100),
-  create_ts TIMESTAMP NULL,
-  update_ts TIMESTAMP NULL
+  created TIMESTAMP NULL,
+  updated TIMESTAMP NULL
 );
 
 INSERT INTO item (value) VALUES ('Test1');

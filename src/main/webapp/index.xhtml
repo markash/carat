@@ -14,7 +14,7 @@
 
             <h:graphicImage id="waveImg" url="#{resource['wave.med.gif']}" />
             <h:inputText id="username" value="#{indexController.name}"/>
-            <h:commandButton id="submit" action="#{indexController.response}" value="Submit"/>
+            <h:commandButton id="submit" action="#{indexController.onSubmit()}" value="Submit"/>
         </h:form>
     </ui:define>
 </ui:composition>

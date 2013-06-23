@@ -5,22 +5,22 @@ import org.jooq.Record;
 import java.io.Serializable;
 
 public class Item implements Serializable {
-    private Long id;
+    private Integer id;
     private String value;
     private Long version;
 
     public Item() { }
 
     public Item(Record record) {
-        this.id = record.getValue("ID", Long.class);
-        this.value = record.getValue("VALUE", String.class);
+        this.id = record.getValue(za.co.yellowfire.carat.db.postgres.tables.Item.ITEM.ID);
+        this.value = record.getValue(za.co.yellowfire.carat.db.postgres.tables.Item.ITEM.VALUE);
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

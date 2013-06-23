@@ -17,10 +17,12 @@
         <Arg><Ref id="webAppCtx"/></Arg>
         <Arg>jdbc/carat</Arg>
         <Arg>
-            <New class="org.hsqldb.jdbc.JDBCDataSource">
-                <Set name="DatabaseName">file:./target/carat-db</Set>
-                <Set name="User">sa</Set>
-                <Set name="Password">sa</Set>
+            <New class="org.postgresql.ds.PGSimpleDataSource">
+                <Set name="User">carat-user</Set>
+                <Set name="Password">password1*</Set>
+                <Set name="DatabaseName">carat-db</Set>
+                <Set name="ServerName">localhost</Set>
+                <Set name="PortNumber">5432</Set>
             </New>
         </Arg>
     </New>

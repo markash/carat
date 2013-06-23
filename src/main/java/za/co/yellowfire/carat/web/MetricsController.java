@@ -8,16 +8,17 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 
-@Named
-@Startup
-@Singleton
-public class MetricsController {
+//@Named
+//@Startup
+//@Singleton
+public class MetricsController implements Serializable {
 
-    @Inject @Metrics
+    //@Inject @Metrics
     private JmxReporter reporter;
 
-    @PostConstruct
+    //@PostConstruct
     public void startUp() {
         reporter.start();
     }

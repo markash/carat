@@ -25,15 +25,17 @@
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
     </listener>
-    <!-- Codahale Metrics Configuration / Loader Listener -->
+
+    <!--
     <listener>
         <listener-class>za.co.yellowfire.carat.metrics.MetricsAdminServletContextListener</listener-class>
     </listener>
-    <!-- Apache Shiro Configuration / Loader Listener -->
     <listener>
         <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
     </listener>
+    -->
 
+    <!--
     <filter>
         <filter-name>Metrics Instrumented Filter</filter-name>
         <filter-class>com.codahale.metrics.servlet.InstrumentedFilter</filter-class>
@@ -42,6 +44,7 @@
         <filter-name>Metrics Instrumented Filter</filter-name>
         <url-pattern>/faces/*</url-pattern>
     </filter-mapping>
+
     <filter>
         <filter-name>Shiro Filter</filter-name>
         <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
@@ -54,35 +57,35 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
+    -->
 
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <!--
     <servlet>
         <servlet-name>Metrics Admin Servlet</servlet-name>
         <servlet-class>com.codahale.metrics.servlets.AdminServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
+    -->
+
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
+
+    <!--
     <servlet-mapping>
         <servlet-name>Metrics Admin Servlet</servlet-name>
         <url-pattern>/metrics/*</url-pattern>
     </servlet-mapping>
+    -->
 
     <welcome-file-list>
         <welcome-file>/app/index.xhtml</welcome-file>
     </welcome-file-list>
-
-    <!--
-    <persistence-context-ref>
-        <persistence-context-ref-name>persistence/em</persistence-context-ref-name>
-        <persistence-unit-name>carat</persistence-unit-name>
-    </persistence-context-ref>
-    -->
 </web-app>
