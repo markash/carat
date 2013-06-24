@@ -6,20 +6,20 @@
         <h2>Login</h2>
         <h:form id="frmLogin">
             <h:panelGrid columns="3" id="pnlContent">
-                <h:outputLabel for="username" value="Username:" />
+                <h:outputLabel for="username" description="Username:" />
                 <h:inputText id="username" required="true" />
                 <h:message for="username" />
 
-                <h:outputLabel for="password" value="Password" />
+                <h:outputLabel for="password" description="Password" />
                 <h:inputSecret id="password" required="true" />
                 <h:message for="password" />
 
-                <h:outputLabel for="rememberMe" value="Remember Me" />
+                <h:outputLabel for="rememberMe" description="Remember Me" />
                 <h:selectBooleanCheckbox id="rememberMe" />
                 <h:panelGroup />
 
                 <h:panelGroup />
-                <h:commandButton value="Login" />
+                <h:commandButton description="Login" />
                 <h:panelGroup styleClass="error" rendered="#{not facesContext.validationFailed}">
                     #{shiroLoginFailure}
                 </h:panelGroup>

@@ -1,10 +1,10 @@
 package za.co.yellowfire.carat.db;
 
-import org.jooq.DSLContext;
-import org.jooq.Record;
-import org.jooq.Result;
-import org.jooq.SQLDialect;
+import org.jooq.*;
 import org.jooq.impl.DSL;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
+import org.modelmapper.TypeMap;
 
 import javax.inject.Named;
 import javax.naming.InitialContext;
@@ -25,19 +25,30 @@ public class ItemDao implements Serializable {
 
     public List<Item> getItems() {
         try {
-            //Connection conn = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/carat-db", "sa", "sa");
             DSLContext create = DSL.using(getDataSource(), SQLDialect.POSTGRES);
+            //final ModelMapper mapper = new ModelMapper();
+            //final TypeMap<Record, Item> map = mapper.createTypeMap(Record.class, Item.class);
 
-            List<Item> results = new ArrayList<Item>();
-            Result<Record> result = create.select().from("ITEM").fetch();
-            for (Record record : result) {
-                results.add(new Item(record));
-            }
-            System.out.println("results = " + results);
+            List<za.co.yellowfire.carat.db.Item> results =
+                    create.select().from(za.co.yellowfire.carat.db.postgres.tables.Item.ITEM)
+                            .fetch(new RecordMapper<Record, za.co.yellowfire.carat.db.Item>() {
+                                @Override
+                                public za.co.yellowfire.carat.db.Item map(Record record) {
+                                    return new Item(record);
+                                }
+                            });
             return results;
         } catch (Throwable e) {
             e.printStackTrace();
         }
         return new ArrayList<Item>(0);
     }
+
+//    private static class ItemMap extends PropertyMap<Record, za.co.yellowfire.carat.db.Item> {
+//      protected void configure() {
+//          Object value = source.getValue("id");
+//          System.out.println("description = " + value);
+//        //map().setId(source.getDescription(za.co.yellowfire.carat.db.postgres.tables.Item.ITEM.ID));
+//      }
+//    }
 }
