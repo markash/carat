@@ -1,10 +1,11 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:o="http://omnifaces.org/ui"
                 template="/templates/main.xhtml">
     <ui:define name="content">
         <h2>Login</h2>
-        <h:form id="login">
+        <o:form includeViewParams="true" id="login">
             <h:panelGrid columns="3">
                 <h:outputLabel for="username" value="Username:" />
                 <h:inputText id="username" value="#{loginController.username}" required="true">
@@ -28,6 +29,6 @@
                 </h:commandButton>
                 <h:messages globalOnly="true" layout="table" />
             </h:panelGrid>
-        </h:form>
+        </o:form>
     </ui:define>
 </ui:composition>
