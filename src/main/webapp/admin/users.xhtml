@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+                template="/templates/main.xhtml">
+    <ui:define name="content">
+        <h2>My name is Duke.  What is yours?</h2>
+        <h:form id="helloForm" >
+            <h:dataTable value="#{indexController.items}" var="o" styleClass="table table-striped table-bordered table-condensed table-hover">
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    #{o.description}
+                </h:column>
+            </h:dataTable>
+
+            <h:graphicImage id="waveImg" url="#{resource['wave.med.gif']}" />
+            <h:inputText id="username" value="#{indexController.name}"/>
+            <h:commandButton id="submit" action="#{indexController.onSubmit()}" value="Submit"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

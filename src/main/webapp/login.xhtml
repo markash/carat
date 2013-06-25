@@ -4,25 +4,29 @@
                 template="/templates/main.xhtml">
     <ui:define name="content">
         <h2>Login</h2>
-        <h:form id="frmLogin">
-            <h:panelGrid columns="3" id="pnlContent">
-                <h:outputLabel for="username" description="Username:" />
-                <h:inputText id="username" required="true" />
-                <h:message for="username" />
+        <h:form id="login">
+            <h:panelGrid columns="3">
+                <h:outputLabel for="username" value="Username:" />
+                <h:inputText id="username" value="#{loginController.username}" required="true">
+                    <f:ajax event="blur" render="m_username" />
+                </h:inputText>
+                <h:message id="m_username" for="username" />
 
-                <h:outputLabel for="password" description="Password" />
-                <h:inputSecret id="password" required="true" />
-                <h:message for="password" />
+                <h:outputLabel for="password" value="Password:" />
+                <h:inputSecret id="password" value="#{loginController.password}" required="true">
+                    <f:ajax event="blur" render="m_password" />
+                </h:inputSecret>
+                <h:message id="m_password" for="password" />
 
-                <h:outputLabel for="rememberMe" description="Remember Me" />
-                <h:selectBooleanCheckbox id="rememberMe" />
+                <h:outputLabel for="rememberMe" value="Remember Me:" />
+                <h:selectBooleanCheckbox id="rememberMe" value="#{loginController.remember}" />
                 <h:panelGroup />
 
                 <h:panelGroup />
-                <h:commandButton description="Login" />
-                <h:panelGroup styleClass="error" rendered="#{not facesContext.validationFailed}">
-                    #{shiroLoginFailure}
-                </h:panelGroup>
+                <h:commandButton value="Login" action="#{loginController.submit}" >
+                    <f:ajax execute="@form" render="@form" />
+                </h:commandButton>
+                <h:messages globalOnly="true" layout="table" />
             </h:panelGrid>
         </h:form>
     </ui:define>
