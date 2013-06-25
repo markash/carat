@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import lombok.Data;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -13,6 +14,7 @@ import org.apache.shiro.web.util.WebUtils;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
+@Data
 @Named
 @RequestScoped
 public class LoginController {
