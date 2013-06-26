@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+                template="/templates/main.xhtml">
+    <ui:define name="content">
+        <h2>Register</h2>
+        <h:form id="register">
+            <h:panelGrid columns="3">
+                <h:outputLabel for="username" value="Username:" />
+                <h:inputText id="username" value="#{registerController.user.name}" required="true">
+                    <f:ajax event="blur" render="m_username" />
+                </h:inputText>
+                <h:message id="m_username" for="username" />
+
+                <h:outputLabel for="email" value="Email:" />
+                <h:inputText id="email" value="#{registerController.user.email}" required="true">
+                    <f:ajax event="blur" render="m_email" />
+                </h:inputText>
+                <h:message id="m_email" for="email" />
+
+                <h:outputLabel for="password" value="Password:" />
+                <h:inputSecret id="password" value="#{registerController.user.password}" required="true">
+                    <f:ajax event="blur" render="m_password" />
+                </h:inputSecret>
+                <h:message id="m_password" for="password" />
+
+                <ui:remove>
+                <!--
+                <h:outputLabel for="roles" value="Roles:" />
+                <h:selectManyCheckbox id="roles" value="#{registerController.user.roles}" required="false"
+                                      layout="pageDirection" converter="carat.RolesListConverter">
+                    <f:selectItems value="#{registerController.roles}"  var="role" itemLabel="#{role.name}" itemValue="#{role.name}" />
+                </h:selectManyCheckbox>
+                <h:message id="m_roles" for="roles" />
+                -->
+                </ui:remove>
+
+                <h:panelGroup />
+                <h:commandButton value="Register" action="#{registerController.submit}" >
+                    <f:ajax execute="@form" render="@form" />
+                </h:commandButton>
+                <h:messages globalOnly="true" layout="table" />
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

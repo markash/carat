@@ -20,19 +20,23 @@ public class User implements Serializable {
 
     private List<Role> roles;
 
+    public User() {
+        this.roles = new ArrayList<>(0);
+    }
+
     public User(Integer id, String name, String password, String email, List<Role> roles) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.email = email;
-        this.roles = new ArrayList<Role>(roles != null ? roles.size() : 0);
+        this.roles = new ArrayList<>(roles != null ? roles.size() : 0);
         if (roles != null) {
             this.roles.addAll(roles);
         }
     }
 
     public List<Role> getRoles() {
-        List<Role> results = new ArrayList<Role>(roles.size());
+        List<Role> results = new ArrayList<>(roles.size());
         Collections.copy(results, roles);
         return results;
     }
