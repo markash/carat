@@ -34,7 +34,9 @@ public class ItemDao implements Serializable {
                             .fetch(new RecordMapper<Record, za.co.yellowfire.carat.db.Item>() {
                                 @Override
                                 public za.co.yellowfire.carat.db.Item map(Record record) {
-                                    return new Item(record);
+                                    return new Item(
+                                            record.getValue(za.co.yellowfire.carat.db.postgres.tables.Item.ITEM.ID),
+                                            record.getValue(za.co.yellowfire.carat.db.postgres.tables.Item.ITEM.DESCRIPTION));
                                 }
                             });
             return results;

@@ -8,9 +8,9 @@ public class Item implements Serializable {
     private Integer id;
     private String description;
 
-    public Item(Record record) {
-        this.id = record.getValue(za.co.yellowfire.carat.db.postgres.tables.Item.ITEM.ID);
-        this.description = record.getValue(za.co.yellowfire.carat.db.postgres.tables.Item.ITEM.DESCRIPTION);
+    public Item(Integer id, String description) {
+        this.id = id;
+        this.description = description;
     }
 
     public Integer getId() {
