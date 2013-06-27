@@ -5,12 +5,24 @@
     <ui:define name="content">
         <h2>My name is Duke.  What is yours?</h2>
         <h:form id="helloForm" >
-            <h:dataTable value="#{indexController.items}" var="o" styleClass="table table-striped table-bordered table-condensed table-hover">
+            <h:dataTable value="#{indexController.items}" var="o"
+                         first="#{indexController.first}" rows="#{indexController.rows}"
+                         styleClass="table table-striped table-bordered table-condensed table-hover" >
                 <h:column>
                     <f:facet name="header">Price</f:facet>
                     #{o.description}
                 </h:column>
             </h:dataTable>
+            <div class="pagination pagination-right">
+                <ul>
+                    <li><h:commandLink value="Previous" action="#{indexController.onPrevious}" rendered="#{indexController.previousRendered}"/></li>
+                    <ui:repeat value="#{indexController.pages}" var="page">
+                        <li><h:commandLink value="#{page}" action="#{indexController.onGoto(page)}"/></li>
+                    </ui:repeat>
+                    <li><h:commandLink value="Next" action="#{indexController.onNext}" rendered="#{indexController.nextRendered}"/></li>
+
+                </ul>
+            </div>
 
             <h:graphicImage id="waveImg" url="#{resource['wave.med.gif']}" />
             <h:inputText id="username" value="#{indexController.name}"/>

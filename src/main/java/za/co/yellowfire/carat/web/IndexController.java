@@ -1,5 +1,8 @@
 package za.co.yellowfire.carat.web;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import za.co.yellowfire.carat.db.Item;
 import za.co.yellowfire.carat.db.ItemDao;
 
@@ -11,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Named
-@ViewScoped
+@ViewScoped @Slf4j
 public class IndexController implements Serializable {
 
     @Inject
@@ -22,6 +25,14 @@ public class IndexController implements Serializable {
 
     private List<Item> items;
     private String name;
+
+    @Getter @Setter
+    private int first;
+
+    @Getter
+    private int increment = 5;
+
+    private int rows = 0;
 
     public String getName() {
         return name;
@@ -46,6 +57,70 @@ public class IndexController implements Serializable {
         System.out.println("response");
         //metricRegistry.counter("index.response").inc();
         //return "index";
+    }
+
+    public int getRows() {
+        final int remaining = items.size() - first;
+        if (remaining > increment) {
+            return increment;
+        }
+        return remaining;
+    }
+
+    public int getPageCount() {
+        return items.size() / increment;
+    }
+
+    public int getCurrentPage() {
+        return (first / increment) + 1;
+    }
+
+    public Integer[] getPages() {
+        final int current = getCurrentPage();
+        final int last = getPageCount();
+        final List<Integer> pages = new ArrayList<>();
+
+        if (current > 1) {
+            pages.add(current - 1);
+        }
+        pages.add(current);
+        if (current < last) {
+            pages.add(current + 1);
+        }
+        return pages.toArray(new Integer[pages.size()]);
+    }
+
+    public String onNext() {
+        if (first + increment <= items.size() - 1) {
+            first = first + increment;
+        } else {
+            first = items.size() - 1 - increment;
+        }
+        log.info("next: first={} increment={} size={}", new Object[] {first, rows, items.size()});
+        return null;
+    }
+
+    public String onPrevious() {
+        if (first - increment <= 0) {
+            first = 0;
+        } else {
+            first = first - increment;
+        }
+        log.info("next: first={} increment={} size={}", new Object[] {first, rows, items.size()});
+        return null;
+    }
+
+    public String onGoto(Integer page) {
+        first = (page - 1) * increment;
+        return null;
+    }
+
+    public boolean isNextRendered() {
+        return first + increment < items.size();
+    }
+
+    public boolean isPreviousRendered() {
+        return first > 0;
     }
 
 //    protected BeanManager getBeanManager() {
