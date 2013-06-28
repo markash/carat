@@ -2,6 +2,7 @@ logs
 project/project
 project/target
 target
+build
 tmp
 .history
 dist
@@ -13,3 +14,4 @@ dist
 /.project
 /RUNNING_PID
 /.settings
+/.gradle
