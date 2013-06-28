@@ -28,6 +28,7 @@ public class RegisterController {
     @Inject
     private UserDao userDao;
 
+    //TODO Remove DataAccessException
     @PostConstruct
     public void init() throws DataAccessException {
         this.user = new User();
