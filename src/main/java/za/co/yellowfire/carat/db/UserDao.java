@@ -20,7 +20,7 @@ import static za.co.yellowfire.carat.db.postgres.tables.AppUser.*;
 import static za.co.yellowfire.carat.db.postgres.tables.AppRole.*;
 
 @Slf4j @Named
-public class UserDao implements Serializable {
+public class UserDao implements Dao<User>, Serializable {
     private static String DATA_SOURCE = "java:comp/env/jdbc/carat";
 
     private DataSource getDataSource() throws NamingException {
@@ -76,7 +76,7 @@ public class UserDao implements Serializable {
         }
     }
 
-    public List<User> getUsers() throws DataAccessException {
+    public List<User> retrieve() throws DataAccessException {
         try {
             DSLContext create = DSL.using(getDataSource(), SQLDialect.POSTGRES);
             return create.select().from(AppUser.APP_USER)

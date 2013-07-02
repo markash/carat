@@ -69,11 +69,22 @@
         <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Metrics Admin Servlet</servlet-name>
         <url-pattern>/metrics/*</url-pattern>
     </servlet-mapping>
 
+    <error-page>
+        <error-code>401</error-code>
+        <location>/error/unauthorized.xhtml</location>
+    </error-page>
+
     <welcome-file-list>
+        <welcome-file>/index.html</welcome-file>
+        <welcome-file>/index.xhtml</welcome-file>
         <welcome-file>/index.jsf</welcome-file>
     </welcome-file-list>
 </web-app>

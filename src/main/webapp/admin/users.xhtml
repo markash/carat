@@ -1,20 +1,19 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:cc="http://java.sun.com/jsf/composite/component"
                 template="/templates/main.xhtml">
     <ui:define name="content">
-        <h2>My name is Duke.  What is yours?</h2>
-        <h:form id="helloForm" >
-            <h:dataTable value="#{indexController.items}" var="o" styleClass="table table-striped table-bordered table-condensed table-hover">
-                <h:column>
-                    <f:facet name="header">Price</f:facet>
-                    #{o.description}
-                </h:column>
+        <h:form id="usersForm" >
+            <div class="page-header"><h2>Users</h2></div>
+            <h:dataTable value="#{usersController.users}" var="o"
+                         first="#{usersController.users.first}" rows="#{usersController.users.rowCount}"
+                         styleClass="table table-striped table-bordered table-condensed table-hover">
+                <h:column><f:facet name="header">User name</f:facet>#{o.name}</h:column>
+                <h:column><f:facet name="header">Email</f:facet>#{o.email}</h:column>
             </h:dataTable>
-
-            <h:graphicImage id="waveImg" url="#{resource['wave.med.gif']}" />
-            <h:inputText id="username" value="#{indexController.name}"/>
-            <h:commandButton id="submit" action="#{indexController.onSubmit()}" value="Submit"/>
+            <cc:pagination id="userPagination" bean="#{usersController.users}" />
         </h:form>
     </ui:define>
 </ui:composition>
