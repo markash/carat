@@ -1,6 +1,7 @@
 package za.co.yellowfire.carat.db;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.RecordMapper;
@@ -33,9 +34,9 @@ public class UserDao implements Dao<User>, Serializable {
             Record record =
             create.insertInto(APP_USER,
                     APP_USER.USERNAME, APP_USER.PASSWORD, APP_USER.EMAIL)
-                    .values(user.getName(), user.getPassword(), user.getEmail())
-                    .returning(APP_USER.ID)
-                    .fetchOne();
+                    .values(user.getName(), new Sha256Hash(user.getPassword()).toHex(), user.getEmail())
+                            .returning(APP_USER.ID)
+                            .fetchOne();
 
             return getUser(record.getValue(APP_USER.ID));
         } catch (NamingException e) {
