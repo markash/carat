@@ -1,5 +1,7 @@
 package za.co.yellowfire.carat.web;
 
+import za.co.yellowfire.carat.db.ItemDao;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -22,6 +24,7 @@ public class IndexControllerTest extends Arquillian {
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addClass(IndexController.class)
+                .addClass(ItemDao.class)
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 

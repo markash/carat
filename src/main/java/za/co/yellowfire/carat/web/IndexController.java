@@ -68,7 +68,7 @@ public class IndexController implements Serializable {
     }
 
     public int getPageCount() {
-        return items.size() / increment;
+        return getItems().size() / increment;
     }
 
     public int getCurrentPage() {
@@ -91,12 +91,12 @@ public class IndexController implements Serializable {
     }
 
     public String onNext() {
-        if (first + increment <= items.size() - 1) {
+        if (first + increment <= getItems().size() - 1) {
             first = first + increment;
         } else {
             first = items.size() - 1 - increment;
         }
-        log.info("next: first={} increment={} size={}", new Object[] {first, rows, items.size()});
+        log.info("next: first={} increment={} size={}", new Object[] {first, rows, getItems().size()});
         return null;
     }
 
@@ -106,7 +106,7 @@ public class IndexController implements Serializable {
         } else {
             first = first - increment;
         }
-        log.info("next: first={} increment={} size={}", new Object[] {first, rows, items.size()});
+        log.info("next: first={} increment={} size={}", new Object[] {first, rows, getItems().size()});
         return null;
     }
 

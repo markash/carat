@@ -81,6 +81,10 @@
         <error-code>401</error-code>
         <location>/error/unauthorized.xhtml</location>
     </error-page>
+    <error-page>
+        <exception-type>org.apache.shiro.authz.AuthorizationException</exception-type>
+        <location>/error/unauthorized.xhtml</location>
+    </error-page>
 
     <welcome-file-list>
         <welcome-file>/index.html</welcome-file>
