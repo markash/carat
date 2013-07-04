@@ -29,16 +29,15 @@
         <listener-class>za.co.yellowfire.carat.metrics.MetricsAdminServletContextListener</listener-class>
     </listener>
     <listener>
+        <listener-class>za.co.yellowfire.carat.metrics.MetricsInstrumentedFilterContextListener</listener-class>
+    </listener>
+    <listener>
         <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
     </listener>
 
     <filter>
         <filter-name>Metrics Instrumented Filter</filter-name>
         <filter-class>com.codahale.metrics.servlet.InstrumentedFilter</filter-class>
-        <init-param>
-            <param-name>com.codahale.metrics.servlet.InstrumentedFilter.registry</param-name>
-            <param-value>za.co.yellowfire.carat.metrics.MetricsInstrumentedFilterContextListener</param-value>
-        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>Metrics Instrumented Filter</filter-name>
