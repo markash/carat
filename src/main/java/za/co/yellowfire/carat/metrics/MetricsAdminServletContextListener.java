@@ -6,6 +6,7 @@ import com.codahale.metrics.health.HealthCheckRegistry;
 import com.codahale.metrics.servlets.AdminServletContextListener;
 
 import javax.enterprise.inject.Produces;
+import javax.servlet.ServletContextEvent;
 
 public class MetricsAdminServletContextListener extends AdminServletContextListener {
 
@@ -28,5 +29,17 @@ public class MetricsAdminServletContextListener extends AdminServletContextListe
    // @Produces @Metrics
     protected JmxReporter getJmxReporter() {
         return reporter;
+    }
+
+    @Override
+    public void contextInitialized(ServletContextEvent servletContextEvent) {
+        super.contextInitialized(servletContextEvent);
+        reporter.start();
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent servletContextEvent) {
+        super.contextDestroyed(servletContextEvent);
+        reporter.stop();
     }
 }
