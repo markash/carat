@@ -17,6 +17,10 @@ public class User implements Serializable {
     private String password;
     @Getter @Setter
     private String email;
+    @Getter @Setter
+    private String firstName;
+    @Getter @Setter
+    private String lastName;
 
     private List<Role> roles;
 
@@ -24,11 +28,13 @@ public class User implements Serializable {
         this.roles = new ArrayList<>(0);
     }
 
-    public User(Integer id, String name, String password, String email, List<Role> roles) {
+    public User(Integer id, String name, String password, String firstName, String lastName, String email, List<Role> roles) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.roles = new ArrayList<>(roles != null ? roles.size() : 0);
         if (roles != null) {
             this.roles.addAll(roles);

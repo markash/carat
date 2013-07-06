@@ -3,7 +3,8 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
               version="2.0">
-    
+
+
     <navigation-rule>
         <description>Home</description>
         <from-view-id>*</from-view-id>
@@ -23,6 +24,15 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
+        <description>Profile</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>profile</from-outcome>
+            <to-view-id>/profile.jsf</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
         <description>Login</description>
         <from-view-id>*</from-view-id>
         <navigation-case>
@@ -38,6 +48,26 @@
             <from-outcome>logout</from-outcome>
             <to-view-id>/logout.jsf</to-view-id>
             <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <description>Profile update</description>
+        <from-view-id>/profile.xhtml</from-view-id>
+        <navigation-case>
+            <to-view-id>/index.xhtml</to-view-id>
+            <from-outcome>update</from-outcome>
+            <redirect>true</redirect>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <description>Profile error</description>
+        <from-view-id>profile</from-view-id>
+        <navigation-case>
+            <to-view-id>/profile.jsf</to-view-id>
+            <from-outcome>error</from-outcome>
+            <redirect>false</redirect>
         </navigation-case>
     </navigation-rule>
 </faces-config>

@@ -36,7 +36,7 @@
                 </ui:remove>
 
                 <h:panelGroup />
-                <h:commandButton value="Register" action="#{registerController.submit}" >
+                <h:commandButton value="Register" action="#{registerController.submit}" styleClass="btn">
                     <f:ajax execute="@form" render="@form" />
                 </h:commandButton>
                 <h:messages globalOnly="true" layout="table" />

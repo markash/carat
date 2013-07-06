@@ -35,19 +35,21 @@
                     <span class="icon-bar">3</span>
                 </button>
                 <h:form id="headerForm">
-                <a href="/" class="brand">Carat</a>
-                <div class="nav-collapse collapse">
-                    <p class="navbar-text pull-right">
-                        <h:commandLink id="profileLink" value="#{request.remoteUser}" action="#{logoutController.submit}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" /> |
-                        <h:commandLink id="logoutLink" value="Logout" action="#{logoutController.submit}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" />
-                        <h:commandLink id="loginLink" value="Login" action="login" styleClass="navbar-link" rendered="#{empty request.remoteUser}" />
-                    </p>
-                    <ul class="nav">
-                        <li class=""><h:commandLink value="Home" action="index" /></li>
-                        <li class=""><h:commandLink value="Users" action="users" /></li>
-                        <li class=""><h:commandLink value="Users" action="users" /></li>
-                    </ul>
-                </div><!--/.nav-collapse -->
+                    <h:commandLink value="Carat" action="index" styleClass="brand"/>
+                    <div class="nav-collapse collapse">
+                        <p class="navbar-text pull-right">
+                            <h:commandLink id="profileLink" value="#{request.remoteUser}" action="#{loginController.onViewProfile}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" >
+                                <f:viewParam name="id" value="#{request.remoteUser}" />
+                            </h:commandLink> |
+                            <h:commandLink id="logoutLink" value="Logout" action="#{logoutController.submit}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" />
+                            <h:commandLink id="loginLink" value="Login" action="login" styleClass="navbar-link" rendered="#{empty request.remoteUser}" />
+                        </p>
+                        <ul class="nav">
+                            <li class=""><h:commandLink value="Home" action="index" /></li>
+                            <li class=""><h:commandLink value="Users" action="users" /></li>
+                            <li class=""><h:commandLink value="Users" action="users" /></li>
+                        </ul>
+                    </div>
                 </h:form>
             </div>
         </div>

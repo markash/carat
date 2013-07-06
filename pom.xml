@@ -321,6 +321,27 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>com.googlecode.flyway</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <user>carat-user</user>
+                    <password>password1*</password>
+                    <driver>org.postgresql.Driver</driver>
+                    <url>jdbc:postgresql://localhost/carat-db</url>
+                    <schemas>
+                        <schema>public</schema>
+                    </schemas>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>9.1-901.jdbc4</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen-maven</artifactId>
                 <version>3.0.0</version>

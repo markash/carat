@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/templates/main.xhtml">
+    <ui:define name="content">
+        <h2>Profile</h2>
+        <f:metadata>
+            <f:viewParam name="id" value="#{profileController.id}" />
+        </f:metadata>
+        <o:form id="register" includeViewParams="true">
+            <h:panelGrid columns="3">
+                <h:outputLabel for="first_name" value="First Name:" styleClass="control-label"/>
+                <h:inputText id="first_name" value="#{profileController.user.firstName}" required="true">
+                    <f:ajax event="blur" render="m_first_name" />
+                </h:inputText>
+                <h:message id="m_first_name" for="first_name" />
+
+                <h:outputLabel for="last_name" value="Last Name:" styleClass="control-label"/>
+                <h:inputText id="last_name" value="#{profileController.user.lastName}" required="true">
+                    <f:ajax event="blur" render="m_last_name" />
+                </h:inputText>
+                <h:message id="m_last_name" for="last_name" />
+
+                <h:outputLabel for="username" value="Username:" styleClass="control-label"/>
+                <h:inputText id="username" value="#{profileController.user.name}" required="true">
+                    <f:ajax event="blur" render="m_username" />
+                </h:inputText>
+                <h:message id="m_username" for="username" />
+
+                <h:outputLabel for="email" value="Email:" styleClass="control-label" />
+                <h:inputText id="email" value="#{profileController.user.email}" required="true">
+                    <f:ajax event="blur" render="m_email" />
+                </h:inputText>
+                <h:message id="m_email" for="email" />
+
+                <h:outputLabel for="password" value="Password:" styleClass="control-label" />
+                <h:inputSecret id="password" value="#{profileController.user.password}" required="true">
+                    <f:ajax event="blur" render="m_password" />
+                </h:inputSecret>
+                <h:message id="m_password" for="password" />
+
+                <ui:remove>
+                <!--
+                <h:outputLabel for="roles" value="Roles:" />
+                <h:selectManyCheckbox id="roles" value="#{registerController.user.roles}" required="false"
+                                      layout="pageDirection" converter="carat.RolesListConverter">
+                    <f:selectItems value="#{registerController.roles}"  var="role" itemLabel="#{role.name}" itemValue="#{role.name}" />
+                </h:selectManyCheckbox>
+                <h:message id="m_roles" for="roles" />
+                -->
+                </ui:remove>
+
+                <h:panelGroup />
+                <h:panelGroup >
+                    <h:panelGrid columns="2">
+                        <h:commandButton value="Update" action="#{profileController.onUpdate}" styleClass="btn btn-primary">
+                            <f:ajax execute="@form" render="@form" />
+                        </h:commandButton>
+                        <h:commandButton value="Cancel" action="#{profileController.onCancel}" styleClass="btn">
+                        </h:commandButton>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <h:messages globalOnly="true" layout="table" />
+            </h:panelGrid>
+        </o:form>
+    </ui:define>
+</ui:composition>

@@ -22,6 +22,8 @@ CREATE TABLE IF NOT EXISTS app_user (
   password TEXT NOT NULL,
   username TEXT NOT NULL,
   email TEXT NOT NULL,
+  first_name TEXT NULL,
+  last_name TEXT NULL,
   UNIQUE(username)
 );
 
@@ -41,6 +43,6 @@ INSERT INTO app_role (role) VALUES ('EMPLOYEE');
 INSERT INTO app_role (role) VALUES ('MANAGER');
 INSERT INTO app_role (role) VALUES ('ADMIN');
 
-INSERT INTO app_user (username, password, email) VALUES ('admin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin@localhost');
+INSERT INTO app_user (username, password, email, first_name, last_name) VALUES ('admin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin@localhost', 'Administrator', 'User');
 
 INSERT INTO app_user_role (user_id, user_role) values (currval('app_user_id_seq'), 'ADMIN');

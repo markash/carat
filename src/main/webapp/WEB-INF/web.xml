@@ -57,6 +57,15 @@
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
 
+    <filter>
+        <filter-name>facesExceptionFilter</filter-name>
+        <filter-class>org.omnifaces.filter.FacesExceptionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>facesExceptionFilter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -83,6 +92,10 @@
     <error-page>
         <error-code>401</error-code>
         <location>/error/unauthorized.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/notfound.xhtml</location>
     </error-page>
     <error-page>
         <exception-type>org.apache.shiro.authz.AuthorizationException</exception-type>

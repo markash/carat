@@ -6,6 +6,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -14,15 +15,17 @@ import org.apache.shiro.web.util.WebUtils;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
-@Data
-@Named
-@RequestScoped
+@Data @Named @RequestScoped @Slf4j
 public class LoginController {
     public static final String HOME_URL = "index.jsf";
 
     private String username;
     private String password;
     private boolean remember;
+
+    public String onViewProfile() {
+        return "/profile?faces-redirect=true&includeViewParams=true&id=admin";
+    }
 
     public void submit() throws IOException {
         try {
@@ -32,7 +35,7 @@ public class LoginController {
         }
         catch (AuthenticationException e) {
             Messages.addGlobalError("Unknown user, please try again");
-            e.printStackTrace(); // TODO: logger.
+            log.error("Authentication exception ", e);
         }
     }
 }

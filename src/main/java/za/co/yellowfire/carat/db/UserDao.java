@@ -45,29 +45,40 @@ public class UserDao implements Dao<User>, Serializable {
         }
     }
 
+    public User update(User user) throws DataAccessException {
+        try {
+            DSLContext create = DSL.using(getDataSource(), SQLDialect.POSTGRES);
+            create.update(APP_USER)
+                            .set(APP_USER.PASSWORD, new Sha256Hash(user.getPassword()).toHex())
+                            .set(APP_USER.FIRST_NAME, user.getFirstName())
+                            .set(APP_USER.LAST_NAME, user.getLastName())
+                            .set(APP_USER.EMAIL, user.getEmail())
+                            .where(APP_USER.ID.eq(user.getId()));
+
+            return getUser(user.getId());
+        } catch (NamingException e) {
+            log.error("Unable to resolve data source {}", DATA_SOURCE);
+            throw new DataAccessException("Unable to resolve data source " + DATA_SOURCE);
+        }
+    }
+
     public User getUser(Integer userId) throws DataAccessException {
         try {
             DSLContext create = DSL.using(getDataSource(), SQLDialect.POSTGRES);
-            List<User> results =  create.select().from(AppUser.APP_USER).where(APP_USER.ID.eq(userId))
-                    .fetch(new RecordMapper<Record, User>() {
-                        @Override
-                        public User map(Record record) {
-                            List<Role> roles = new ArrayList<>(0);
-                            try {
-                                roles = getRoles(record.getValue(AppUser.APP_USER.ID));
-                            } catch (DataAccessException e) {
-                                        /*IGNORE*/
-                            }
-                            return new User(
-                                    record.getValue(AppUser.APP_USER.ID),
-                                    record.getValue(AppUser.APP_USER.USERNAME),
-                                    record.getValue(AppUser.APP_USER.PASSWORD),
-                                    record.getValue(AppUser.APP_USER.EMAIL),
-                                    roles
-                            );
-                        }
-                    });
+            List<User> results =  create.select().from(AppUser.APP_USER).where(APP_USER.ID.eq(userId)).fetch(new UserRecordMapper());
+            if (results.size() > 0) {
+                return results.get(0);
+            }
+            return null;
+        } catch (NamingException e) {
+            throw new DataAccessException("Unable to resolve data source " + DATA_SOURCE);
+        }
+    }
 
+    public User getUser(String userName) throws DataAccessException {
+        try {
+            DSLContext create = DSL.using(getDataSource(), SQLDialect.POSTGRES);
+            List<User> results =  create.select().from(AppUser.APP_USER).where(APP_USER.USERNAME.eq(userName)).fetch(new UserRecordMapper());
             if (results.size() > 0) {
                 return results.get(0);
             }
@@ -80,25 +91,7 @@ public class UserDao implements Dao<User>, Serializable {
     public List<User> retrieve() throws DataAccessException {
         try {
             DSLContext create = DSL.using(getDataSource(), SQLDialect.POSTGRES);
-            return create.select().from(AppUser.APP_USER)
-                            .fetch(new RecordMapper<Record, User>() {
-                                @Override
-                                public User map(Record record) {
-                                    List<Role> roles = new ArrayList<>(0);
-                                    try {
-                                        roles = getRoles(record.getValue(AppUser.APP_USER.ID));
-                                    } catch (DataAccessException e) {
-                                        /*IGNORE*/
-                                    }
-                                    return new User(
-                                            record.getValue(AppUser.APP_USER.ID),
-                                            record.getValue(AppUser.APP_USER.USERNAME),
-                                            record.getValue(AppUser.APP_USER.PASSWORD),
-                                            record.getValue(AppUser.APP_USER.EMAIL),
-                                            roles
-                                    );
-                                }
-                            });
+            return create.select().from(AppUser.APP_USER).fetch(new UserRecordMapper());
         } catch (NamingException e) {
             throw new DataAccessException("Unable to resolve data source " + DATA_SOURCE);
         }
@@ -107,8 +100,6 @@ public class UserDao implements Dao<User>, Serializable {
     public List<Role> getRoles(Integer userId) throws DataAccessException {
         try {
             DSLContext create = DSL.using(getDataSource(), SQLDialect.POSTGRES);
-
-
             return create.select().from(AppUserRole.APP_USER_ROLE).where(AppUserRole.APP_USER_ROLE.USER_ID.eq(userId))
                     .fetch(new RecordMapper<Record, Role>() {
                         @Override
@@ -126,17 +117,40 @@ public class UserDao implements Dao<User>, Serializable {
     public List<Role> getRoles() throws DataAccessException {
         try {
             DSLContext create = DSL.using(getDataSource(), SQLDialect.POSTGRES);
-            return create.select().from(APP_ROLE)
-                    .fetch(new RecordMapper<Record, Role>() {
-                        @Override
-                        public Role map(Record record) {
-                            return new Role(
-                                    record.getValue(APP_ROLE.ROLE)
-                            );
-                        }
-                    });
+            return create.select().from(APP_ROLE).fetch(new RoleRecordMapper());
         } catch (NamingException e) {
             throw new DataAccessException("Unable to resolve data source " + DATA_SOURCE);
+        }
+    }
+
+    private class RoleRecordMapper implements RecordMapper<Record, Role> {
+        @Override
+        public Role map(Record record) {
+            if (record.size() > 0)
+                return new Role( record.getValue(APP_ROLE.ROLE));
+            else
+                return null;
+        }
+    }
+
+    private class UserRecordMapper implements RecordMapper<Record, User> {
+        @Override
+        public User map(Record record) {
+            List<Role> roles = new ArrayList<>(0);
+            try {
+                roles = getRoles(record.getValue(AppUser.APP_USER.ID));
+            } catch (DataAccessException e) {
+                                        /*IGNORE*/
+            }
+            return new User(
+                    record.getValue(AppUser.APP_USER.ID),
+                    record.getValue(AppUser.APP_USER.USERNAME),
+                    record.getValue(AppUser.APP_USER.PASSWORD),
+                    record.getValue(AppUser.APP_USER.FIRST_NAME),
+                    record.getValue(AppUser.APP_USER.LAST_NAME),
+                    record.getValue(AppUser.APP_USER.EMAIL),
+                    roles
+            );
         }
     }
 }
