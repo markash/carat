@@ -58,8 +58,7 @@
                         <h:commandButton value="Update" action="#{profileController.onUpdate}" styleClass="btn btn-primary">
                             <f:ajax execute="@form" render="@form" />
                         </h:commandButton>
-                        <h:commandButton value="Cancel" action="#{profileController.onCancel}" styleClass="btn">
-                        </h:commandButton>
+                        <h:commandButton value="Cancel" action="#{profileController.onCancel}" styleClass="btn" immediate="true" />
                     </h:panelGrid>
                 </h:panelGroup>
                 <h:messages globalOnly="true" layout="table" />
