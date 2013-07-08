@@ -17,6 +17,7 @@
 
         <dependency.metrics.version>3.0.0</dependency.metrics.version>
         <dependency.jdbi.version>2.49</dependency.jdbi.version>
+        <dependency.postgres.version>9.1-901.jdbc4</dependency.postgres.version>
     </properties>
 
 
@@ -230,7 +231,17 @@
                     <dependency>
                         <groupId>postgresql</groupId>
                         <artifactId>postgresql</artifactId>
-                        <version>9.1-901.jdbc4</version>
+                        <version>${dependency.postgres.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.atomikos</groupId>
+                        <artifactId>transactions</artifactId>
+                        <version>3.9.0.M1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.atomikos</groupId>
+                        <artifactId>transactions-jdbc</artifactId>
+                        <version>3.9.0.M1</version>
                     </dependency>
                     <dependency>
                         <groupId>com.yammer.metrics</groupId>
@@ -307,7 +318,7 @@
                     <dependency>
                         <groupId>postgresql</groupId>
                         <artifactId>postgresql</artifactId>
-                        <version>9.1-901.jdbc4</version>
+                        <version>${dependency.postgres.version}</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -337,7 +348,7 @@
                     <dependency>
                         <groupId>postgresql</groupId>
                         <artifactId>postgresql</artifactId>
-                        <version>9.1-901.jdbc4</version>
+                        <version>${dependency.postgres.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -376,7 +387,7 @@
                     <dependency>
                         <groupId>postgresql</groupId>
                         <artifactId>postgresql</artifactId>
-                        <version>9.1-901.jdbc4</version>
+                        <version>${dependency.postgres.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
