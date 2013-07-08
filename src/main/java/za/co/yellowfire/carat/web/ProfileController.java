@@ -51,15 +51,15 @@ public class ProfileController {
         try {
             user = userDao.update(user);
             Messages.addGlobalInfo("Registration succeeded, new user ID is: {0}", user.getId());
-            return "update";
+            return Outcomes.UPDATE;
         } catch (DataAccessException e) {
             Messages.addGlobalError("Profile update failed: {0}", e.getMessage());
             log.error("Profile update failed: {}", e.getMessage());
-            return "error";
+            return Outcomes.ERROR;
         }
     }
 
     public String onCancel() {
-        return "/index?faces-redirect=true";
+        return Outcomes.CANCEL;
     }
 }
