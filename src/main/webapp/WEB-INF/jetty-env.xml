@@ -26,4 +26,17 @@
             </New>
         </Arg>
     </New>
+    <New id="batchds" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg><Ref id="webAppCtx"/></Arg>
+        <Arg>jdbc/batch</Arg>
+        <Arg>
+            <New class="org.postgresql.ds.PGSimpleDataSource">
+                <Set name="User">carat-user</Set>
+                <Set name="Password">password1*</Set>
+                <Set name="DatabaseName">carat-db</Set>
+                <Set name="ServerName">localhost</Set>
+                <Set name="PortNumber">5432</Set>
+            </New>
+        </Arg>
+    </New>
 </Configure>

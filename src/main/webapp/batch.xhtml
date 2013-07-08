@@ -1,0 +1,10 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+                template="/templates/main.xhtml">
+    <ui:define name="content">
+        <h:form id="batchForm" >
+            <h:commandButton id="submit" action="#{batchController.onSubmit()}" value="Submit" styleClass="btn"/>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -165,7 +165,23 @@
             <artifactId>commons-logging</artifactId>
             <version>1.1.1</version>
         </dependency>
-
+        <!--************************************************************************************************************
+             Batch
+        *************************************************************************************************************-->
+        <dependency>
+            <groupId>com.ibm.jbatch</groupId>
+            <artifactId>com.ibm.jbatch-runtime</artifactId>
+            <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--************************************************************************************************************
+             Ease
+        *************************************************************************************************************-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
