@@ -3,7 +3,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>za.co.yellowfire</groupId>
+    <parent>
+        <groupId>za.co.yellowfire</groupId>
+        <artifactId>carat-parent</artifactId>
+        <version>0.1.0</version>
+    </parent>
+
     <artifactId>carat</artifactId>
     <packaging>war</packaging>
     <version>0.1.0</version>
@@ -14,180 +19,183 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <dependency.metrics.version>3.0.0</dependency.metrics.version>
         <dependency.jdbi.version>2.49</dependency.jdbi.version>
         <dependency.postgres.version>9.1-901.jdbc4</dependency.postgres.version>
     </properties>
 
-
-
     <dependencies>
-        <!--************************************************************************************************************
-             Enterprise Edition
-        *************************************************************************************************************-->
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
-        </dependency>
-        <!--************************************************************************************************************
-             Java Server Faces
-        *************************************************************************************************************-->
-        <!--
-        <dependency>
-            <groupId>javax.faces</groupId>
-            <artifactId>javax.faces-api</artifactId>
-            <version>2.2</version>
-            <scope>provided</scope>
-        </dependency>
-        -->
-        <dependency>
-            <groupId>org.omnifaces</groupId>
-            <artifactId>omnifaces</artifactId>
-            <version>1.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.faces</artifactId>
-            <version>2.2.0</version>
-        </dependency>
-        <!--************************************************************************************************************
-             Java Persistence
-        *************************************************************************************************************-->
-        <dependency>
-            <groupId>org.modelmapper</groupId>
-            <artifactId>modelmapper</artifactId>
-            <version>0.5.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq</artifactId>
-            <version>3.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq-meta</artifactId>
-            <version>3.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq-codegen</artifactId>
-            <version>3.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.1-901.jdbc4</version>
+            <groupId>za.co.yellowfire</groupId>
+            <artifactId>carat-db</artifactId>
+            <version>0.1.0</version>
         </dependency>
 
-        <!--************************************************************************************************************
-             Context Dependency Injection
-        *************************************************************************************************************-->
-        <dependency>
-            <groupId>org.jboss.weld</groupId>
-            <artifactId>weld-core</artifactId>
-            <version>2.0.1.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.weld.servlet</groupId>
-            <artifactId>weld-servlet</artifactId>
-            <version>2.0.1.Final</version>
-            <scope>runtime</scope>
-        </dependency>
-        <!--************************************************************************************************************
-             Unit Testing
-        *************************************************************************************************************-->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.8.5</version>
-            <scope>test</scope>
-        </dependency>
-        <!--************************************************************************************************************
-             Integration Testing
-        *************************************************************************************************************-->
-        <dependency>
-            <groupId>org.jboss.arquillian.testng</groupId>
-            <artifactId>arquillian-testng-container</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
-            <version>1.0.0.CR7</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.6.4</version>
-            <scope>test</scope>
-        </dependency>
-        <!--************************************************************************************************************
-             Metrics
-        *************************************************************************************************************-->
-        <dependency>
-            <groupId>com.codahale.metrics</groupId>
-            <artifactId>metrics-core</artifactId>
-            <version>${dependency.metrics.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.codahale.metrics</groupId>
-            <artifactId>metrics-servlets</artifactId>
-            <version>${dependency.metrics.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.codahale.metrics</groupId>
-            <artifactId>metrics-servlet</artifactId>
-            <version>${dependency.metrics.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.codahale.metrics</groupId>
-            <artifactId>metrics-jdbi</artifactId>
-            <version>${dependency.metrics.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.yammer.metrics</groupId>
-            <artifactId>metrics-jetty</artifactId>
-            <version>2.2.0</version>
-        </dependency>
-        <!--************************************************************************************************************
-             Security
-        *************************************************************************************************************-->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-web</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <!--************************************************************************************************************
-             Batch
-        *************************************************************************************************************-->
-        <dependency>
-            <groupId>com.ibm.jbatch</groupId>
-            <artifactId>com.ibm.jbatch-runtime</artifactId>
-            <version>1.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!--************************************************************************************************************
-             Ease
-        *************************************************************************************************************-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>0.11.8</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--&lt;!&ndash;************************************************************************************************************-->
+             <!--Enterprise Edition-->
+        <!--*************************************************************************************************************&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>javax</groupId>-->
+            <!--<artifactId>javaee-web-api</artifactId>-->
+            <!--<version>7.0</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;************************************************************************************************************-->
+             <!--Java Server Faces-->
+        <!--*************************************************************************************************************&ndash;&gt;-->
+        <!--&lt;!&ndash;-->
+        <!--<dependency>-->
+            <!--<groupId>javax.faces</groupId>-->
+            <!--<artifactId>javax.faces-api</artifactId>-->
+            <!--<version>2.2</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+        <!--&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.omnifaces</groupId>-->
+            <!--<artifactId>omnifaces</artifactId>-->
+            <!--<version>1.5</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.glassfish</groupId>-->
+            <!--<artifactId>javax.faces</artifactId>-->
+            <!--<version>2.2.0</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;************************************************************************************************************-->
+             <!--Java Persistence-->
+        <!--*************************************************************************************************************&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.modelmapper</groupId>-->
+            <!--<artifactId>modelmapper</artifactId>-->
+            <!--<version>0.5.5</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.jooq</groupId>-->
+            <!--<artifactId>jooq</artifactId>-->
+            <!--<version>3.0.1</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.jooq</groupId>-->
+            <!--<artifactId>jooq-meta</artifactId>-->
+            <!--<version>3.0.1</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.jooq</groupId>-->
+            <!--<artifactId>jooq-codegen</artifactId>-->
+            <!--<version>3.0.1</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>postgresql</groupId>-->
+            <!--<artifactId>postgresql</artifactId>-->
+            <!--<version>9.1-901.jdbc4</version>-->
+        <!--</dependency>-->
+
+        <!--&lt;!&ndash;************************************************************************************************************-->
+             <!--Context Dependency Injection-->
+        <!--*************************************************************************************************************&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.jboss.weld</groupId>-->
+            <!--<artifactId>weld-core</artifactId>-->
+            <!--<version>2.0.1.Final</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.jboss.weld.servlet</groupId>-->
+            <!--<artifactId>weld-servlet</artifactId>-->
+            <!--<version>2.0.1.Final</version>-->
+            <!--<scope>runtime</scope>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;************************************************************************************************************-->
+             <!--Unit Testing-->
+        <!--*************************************************************************************************************&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.testng</groupId>-->
+            <!--<artifactId>testng</artifactId>-->
+            <!--<version>6.8.5</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;************************************************************************************************************-->
+             <!--Integration Testing-->
+        <!--*************************************************************************************************************&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.jboss.arquillian.testng</groupId>-->
+            <!--<artifactId>arquillian-testng-container</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.jboss.arquillian.container</groupId>-->
+            <!--<artifactId>arquillian-weld-ee-embedded-1.1</artifactId>-->
+            <!--<version>1.0.0.CR7</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-simple</artifactId>-->
+            <!--<version>1.6.4</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;************************************************************************************************************-->
+             <!--Metrics-->
+        <!--*************************************************************************************************************&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.codahale.metrics</groupId>-->
+            <!--<artifactId>metrics-core</artifactId>-->
+            <!--<version>${dependency.metrics.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.codahale.metrics</groupId>-->
+            <!--<artifactId>metrics-servlets</artifactId>-->
+            <!--<version>${dependency.metrics.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.codahale.metrics</groupId>-->
+            <!--<artifactId>metrics-servlet</artifactId>-->
+            <!--<version>${dependency.metrics.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.codahale.metrics</groupId>-->
+            <!--<artifactId>metrics-jdbi</artifactId>-->
+            <!--<version>${dependency.metrics.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.yammer.metrics</groupId>-->
+            <!--<artifactId>metrics-jetty</artifactId>-->
+            <!--<version>2.2.0</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;************************************************************************************************************-->
+             <!--Security-->
+        <!--*************************************************************************************************************&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.shiro</groupId>-->
+            <!--<artifactId>shiro-web</artifactId>-->
+            <!--<version>1.2.2</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>commons-logging</groupId>-->
+            <!--<artifactId>commons-logging</artifactId>-->
+            <!--<version>1.1.1</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;************************************************************************************************************-->
+             <!--Batch-->
+        <!--*************************************************************************************************************&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.ibm.jbatch</groupId>-->
+            <!--<artifactId>com.ibm.jbatch-runtime</artifactId>-->
+            <!--<version>1.0</version>-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>junit</groupId>-->
+                    <!--<artifactId>junit</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;************************************************************************************************************-->
+             <!--Ease-->
+        <!--*************************************************************************************************************&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.projectlombok</groupId>-->
+            <!--<artifactId>lombok</artifactId>-->
+            <!--<version>0.11.8</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
     </dependencies>
 
     <dependencyManagement>
