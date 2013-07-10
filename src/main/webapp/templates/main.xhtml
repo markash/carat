@@ -6,7 +6,7 @@
       xmlns:p="http://xmlns.jcp.org/jsf/core">
 <f:view contentType="text/html" />
 <h:head>
-    <title>Carat::Index</title>
+    <title>#{initParam['za.co.yellowfire.carat.web.NAME']}::Index</title>
     <h:outputStylesheet library="css" name="bootstrap.css" />
     <h:outputStylesheet library="css" name="bootstrap-responsive.css" />
     <h:outputStylesheet library="css" name="main.css" />
@@ -36,7 +36,7 @@
                     <span class="icon-bar">3</span>
                 </button>
                 <h:form id="headerForm">
-                    <h:commandLink value="Carat" action="index" styleClass="brand"/>
+                    <h:commandLink value="#{initParam['za.co.yellowfire.carat.web.NAME']}" action="index" styleClass="brand"/>
                     <div class="nav-collapse collapse">
                         <p class="navbar-text pull-right">
                             <h:commandLink id="profileLink" value="#{request.remoteUser}" action="#{loginController.onViewProfile}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" >
