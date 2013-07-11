@@ -7,20 +7,25 @@
 <f:view contentType="text/html" />
 <h:head>
     <title>#{initParam['za.co.yellowfire.carat.web.NAME']}::Index</title>
-    <h:outputStylesheet library="css" name="bootstrap.css" />
-    <h:outputStylesheet library="css" name="bootstrap-responsive.css" />
+    <h:outputStylesheet library="webjars/bootstrap/2.3.2/css" name="bootstrap.css" />
+    <h:outputStylesheet library="webjars/bootstrap/2.3.2/css" name="bootstrap-responsive.css" />
     <h:outputStylesheet library="css" name="main.css" />
 
-    <h:outputScript library="js" name="bootstrap-affix.js"      target="body" />
-    <h:outputScript library="js" name="bootstrap-transition.js" target="body" />
-    <h:outputScript library="js" name="bootstrap-alert.js"      target="body" />
-    <h:outputScript library="js" name="bootstrap-button.js"     target="body" />
-    <h:outputScript library="js" name="bootstrap-collapse.js"   target="body" />
-    <h:outputScript library="js" name="bootstrap-dropdown.js"   target="body" />
-    <h:outputScript library="js" name="bootstrap-modal.js"      target="body" />
-    <h:outputScript library="js" name="bootstrap-tab.js"        target="body" />
-    <h:outputScript library="js" name="bootstrap-tooltip.js"    target="body" />
-    <h:outputScript library="js" name="bootstrap-typeahead.js"  target="body" />
+    <h:outputScript library="webjars/bootstrap/2.3.2/js"    name="bootstrap.js"      target="body" />
+    <h:outputScript library="webjars/jquery/1.9.0"          name="jquery.js"      target="body" />
+
+    <ui:remove>
+    <!--<h:outputScript library="js" name="bootstrap-affix.js"      target="body" />-->
+    <!--<h:outputScript library="js" name="bootstrap-transition.js" target="body" />-->
+    <!--<h:outputScript library="js" name="bootstrap-alert.js"      target="body" />-->
+    <!--<h:outputScript library="js" name="bootstrap-button.js"     target="body" />-->
+    <!--<h:outputScript library="js" name="bootstrap-collapse.js"   target="body" />-->
+    <!--<h:outputScript library="js" name="bootstrap-dropdown.js"   target="body" />-->
+    <!--<h:outputScript library="js" name="bootstrap-modal.js"      target="body" />-->
+    <!--<h:outputScript library="js" name="bootstrap-tab.js"        target="body" />-->
+    <!--<h:outputScript library="js" name="bootstrap-tooltip.js"    target="body" />-->
+    <!--<h:outputScript library="js" name="bootstrap-typeahead.js"  target="body" />-->
+    </ui:remove>
 
     <link rel="shortcut icon" type="image/png" href="resources/img/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
