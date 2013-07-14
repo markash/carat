@@ -6,12 +6,12 @@
     <parent>
         <groupId>za.co.yellowfire</groupId>
         <artifactId>carat-parent</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.1</version>
     </parent>
 
     <artifactId>carat</artifactId>
     <packaging>war</packaging>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
 
     <name>Carat</name>
     <description>The measure of performance</description>
