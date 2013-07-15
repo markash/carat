@@ -2,7 +2,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:cc="http://java.sun.com/jsf/composite/component"
+                xmlns:ct="http://www.yellowfire.co.za/carat/ui"
                 template="/templates/main.xhtml">
     <ui:define name="content">
         <h:form id="usersForm" >
@@ -13,7 +13,7 @@
                 <h:column><f:facet name="header">User name</f:facet>#{o.name}</h:column>
                 <h:column><f:facet name="header">Email</f:facet>#{o.email}</h:column>
             </h:dataTable>
-            <cc:pagination id="userPagination" bean="#{usersController.users}" />
+            <ct:pagination id="userPagination" bean="#{usersController.users}" />
         </h:form>
     </ui:define>
 </ui:composition>
