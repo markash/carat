@@ -5,6 +5,14 @@
         <param-name>za.co.yellowfire.carat.web.NAME</param-name>
         <param-value>Carat</param-value>
     </context-param>
+    <context-param>
+        <param-name>org.eclipse.jetty.servlet.SessionCookie</param-name>
+        <param-value>XSESSIONID</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.eclipse.jetty.servlet.SessionIdPathParameterName</param-name>
+        <param-value>xsessionid</param-value>
+    </context-param>
 
     <listener>
         <listener-class>org.jboss.weld.environment.servlet.BeanManagerResourceBindingListener</listener-class>
@@ -24,6 +32,14 @@
     <filter-mapping>
         <filter-name>GzipFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>cross-origin</filter-name>
+        <filter-class>org.eclipse.jetty.servlets.CrossOriginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>cross-origin</filter-name>
+        <url-pattern>/cometd/*</url-pattern>
     </filter-mapping>
 
     <resource-env-ref>

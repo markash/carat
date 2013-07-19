@@ -105,6 +105,16 @@
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/error/expired.xhtml</location>
     </error-page>
+
+    <session-config>
+        <session-timeout>5</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <!--<secure>true</secure>-->
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
     <welcome-file-list>
         <welcome-file>/index.html</welcome-file>
         <welcome-file>/index.xhtml</welcome-file>
