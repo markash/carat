@@ -12,7 +12,7 @@
     <h:outputStylesheet library="css" name="main.css" />
 
     <h:outputScript library="webjars/bootstrap/2.3.2/js"    name="bootstrap.js"      target="body" />
-    <h:outputScript library="webjars/jquery/1.9.0"          name="jquery.js"      target="body" />
+    <h:outputScript library="webjars/jquery/1.9.0"          name="jquery.js"         target="body" />
 
     <ui:remove>
     <!--<h:outputScript library="js" name="bootstrap-affix.js"      target="body" />-->
@@ -68,15 +68,15 @@
         </div>
         <footer class="footer">
             <div class="container">
-                <p>Designed and built by <a href="http://github.com/markash" target="_blank">mpashworth</a>.</p>
-                <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+                <p>Designed and built by <a href="#{initParam['za.co.yellowfire.carat.web.DEVELOPER_URL']}" target="_blank">#{initParam['za.co.yellowfire.carat.web.DEVELOPER_NAME']}</a>.</p>
+                <p>Code licensed under <a href="#{initParam['za.co.yellowfire.carat.web.LICENSE_URL']}" target="_blank">#{initParam['za.co.yellowfire.carat.web.DEVELOPER_NAME']}</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
                 <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
                 <ul class="footer-links">
-                    <li><a href="http://mpashworth.wordpress.com">Blog</a></li>
+                    <li><a href="#{initParam['za.co.yellowfire.carat.web.BLOG']}">Blog</a></li>
                     <li class="muted"><h:outputText value="&amp;middot;" escape="false"/></li>
-                    <li><a href="https://github.com/markash/carat/issues?state=open">Issues</a></li>
+                    <li><a href="#{initParam['za.co.yellowfire.carat.web.ISSUES_URL']}">Issues</a></li>
                     <li class="muted"><h:outputText value="&amp;middot;" escape="false" /></li>
-                    <li><a href="https://github.com/markash/carat/blob/master/CHANGELOG.md">Changelog</a></li>
+                    <li><a href="#{initParam['za.co.yellowfire.carat.web.CHANGELOG_URL']}">Changelog</a></li>
                 </ul>
             </div>
         </footer>
