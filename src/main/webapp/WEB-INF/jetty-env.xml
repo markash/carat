@@ -1,5 +1,6 @@
 <!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
 <Configure id="webAppCtx" class="org.eclipse.jetty.webapp.WebAppContext">
+    <Set name="overrideDescriptor"><SystemProperty name="jetty.home" default="."/>override-web.xml</Set>
     <New id="BeanManager" class="org.eclipse.jetty.plus.jndi.Resource">
         <Arg>
             <Ref id="webAppCtx"/>

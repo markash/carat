@@ -68,13 +68,13 @@
 
     <!-- =========================================================== -->
     <!-- Get the platform mbean server                               -->
-    <!-- =========================================================== -->
+    <!-- ===========================================================
     <Call id="MBeanServer" class="java.lang.management.ManagementFactory"
           name="getPlatformMBeanServer" />
-
+    -->
     <!-- =========================================================== -->
     <!-- Initialize the Jetty MBean container -->
-    <!-- =========================================================== -->
+    <!-- ===========================================================
     <Call name="addBean">
         <Arg>
             <New id="MBeanContainer" class="org.eclipse.jetty.jmx.MBeanContainer">
@@ -84,6 +84,7 @@
             </New>
         </Arg>
     </Call>
+    -->
 
     <!-- Add the static log -->
     <Call name="addBean">

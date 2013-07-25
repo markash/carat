@@ -22,6 +22,7 @@
         <dependency.metrics.version>3.0.0</dependency.metrics.version>
         <dependency.jdbi.version>2.49</dependency.jdbi.version>
         <dependency.postgres.version>9.1-901.jdbc4</dependency.postgres.version>
+        <dependency.jetty.version>9.0.4.v20130625</dependency.jetty.version>
     </properties>
 
     <dependencies>
@@ -92,6 +93,116 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>copy</goal></goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-runner</artifactId>
+                                    <version>${dependency.jetty.version}</version>
+                                    <destFileName>jetty-runner.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-servlet</artifactId>
+                                    <version>9.0.4.v20130625</version>
+                                    <destFileName>jetty-servlet.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-servlets</artifactId>
+                                    <version>9.0.4.v20130625</version>
+                                    <destFileName>jetty-servlets.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-jmx</artifactId>
+                                    <version>${dependency.jetty.version}</version>
+                                    <destFileName>jetty-jmx.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-jndi</artifactId>
+                                    <version>${dependency.jetty.version}</version>
+                                <destFileName>jetty-jndi.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-util</artifactId>
+                                    <version>${dependency.jetty.version}</version>
+                                    <destFileName>jetty-util.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-deploy</artifactId>
+                                    <version>${dependency.jetty.version}</version>
+                                    <destFileName>jetty-deploy.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-plus</artifactId>
+                                    <version>${dependency.jetty.version}</version>
+                                    <destFileName>jetty-plus.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>postgresql</groupId>
+                                    <artifactId>postgresql</artifactId>
+                                    <version>${dependency.postgres.version}</version>
+                                    <destFileName>postgresql.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.atomikos</groupId>
+                                    <artifactId>transactions</artifactId>
+                                    <version>3.9.0.M1</version>
+                                    <destFileName>atomikos-tx.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.atomikos</groupId>
+                                    <artifactId>transactions-api</artifactId>
+                                    <version>3.9.0.M1</version>
+                                    <destFileName>atomikos-api.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.atomikos</groupId>
+                                    <artifactId>transactions-jdbc</artifactId>
+                                    <version>3.9.0.M1</version>
+                                    <destFileName>atomikos-tx-jdbc.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.atomikos</groupId>
+                                    <artifactId>transactions-jta</artifactId>
+                                    <version>3.9.0.M1</version>
+                                    <destFileName>atomikos-tx-jta.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.atomikos</groupId>
+                                    <artifactId>atomikos-util</artifactId>
+                                    <version>3.9.0.M1</version>
+                                    <destFileName>atomikos-util.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.codahale.metrics</groupId>
+                                    <artifactId>metrics-jetty9</artifactId>
+                                    <version>${dependency.metrics.version}</version>
+                                    <destFileName>metrics.jar</destFileName>
+                                </artifactItem>
+                                <dependency>
+                                    <groupId>org.slf4j</groupId>
+                                    <artifactId>slf4j-simple</artifactId>
+                                    <version>${dependency.slf4j.version}</version>
+                                </dependency>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.0.4.v20130625</version>
@@ -137,7 +248,7 @@
                 <configuration>
                     <jettyXml>src/main/webapp/WEB-INF/jetty-jmx.xml</jettyXml>
                     <webApp>
-                        <overrideDescriptor>src/main/webapp/WEB-INF/web-add.xml</overrideDescriptor>
+                        <overrideDescriptor>src/main/webapp/WEB-INF/override-web.xml</overrideDescriptor>
                     </webApp>
                     <contextXml>src/main/webapp/WEB-INF/jetty-context.xml</contextXml>
                 </configuration>

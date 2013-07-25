@@ -2,6 +2,10 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
     <context-param>
+        <param-name>com.sun.faces.expressionFactory</param-name>
+        <param-value>com.sun.el.ExpressionFactoryImpl</param-value>
+    </context-param>
+    <context-param>
         <param-name>za.co.yellowfire.carat.web.NAME</param-name>
         <param-value>Carat</param-value>
     </context-param>
