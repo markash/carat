@@ -2,7 +2,7 @@
 <!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure_9_0.dtd">
 <Configure id="Server" class="org.eclipse.jetty.server.Server">
 
-    <Arg name="threadpool"><New id="threadpool" class="com.yammer.metrics.jetty.InstrumentedQueuedThreadPool"/></Arg>
+    <!--<Arg name="threadpool"><New id="threadpool" class="com.yammer.metrics.jetty.InstrumentedQueuedThreadPool"/></Arg>-->
 
     <Get name="ThreadPool">
         <Set name="minThreads" type="int"><Property name="threads.min" default="10"/></Set>
@@ -68,13 +68,13 @@
 
     <!-- =========================================================== -->
     <!-- Get the platform mbean server                               -->
-    <!-- ===========================================================
+    <!-- =========================================================== -->
     <Call id="MBeanServer" class="java.lang.management.ManagementFactory"
           name="getPlatformMBeanServer" />
-    -->
+
     <!-- =========================================================== -->
     <!-- Initialize the Jetty MBean container -->
-    <!-- ===========================================================
+    <!-- =========================================================== -->
     <Call name="addBean">
         <Arg>
             <New id="MBeanContainer" class="org.eclipse.jetty.jmx.MBeanContainer">
@@ -84,7 +84,7 @@
             </New>
         </Arg>
     </Call>
-    -->
+
 
     <!-- Add the static log -->
     <Call name="addBean">

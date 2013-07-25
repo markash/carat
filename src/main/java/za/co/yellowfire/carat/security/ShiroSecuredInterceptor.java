@@ -19,8 +19,7 @@ import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.subject.Subject;
 import za.co.yellowfire.carat.security.annotations.ShiroSecured;
 
-@Interceptor
-@ShiroSecured
+@Interceptor @ShiroSecured
 public class ShiroSecuredInterceptor implements Serializable {
     private static final long serialVersionUID = 1L;
 

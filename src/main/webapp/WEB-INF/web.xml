@@ -24,7 +24,6 @@
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
     </listener>
-
     <listener>
         <listener-class>za.co.yellowfire.carat.metrics.MetricsAdminServletContextListener</listener-class>
     </listener>
