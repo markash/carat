@@ -1,0 +1,2 @@
+# JMeter generated Cookie file
+localhost	TRUE	/	FALSE	0	XSESSIONID	jy02nx86z8v5iwtj3w4g1mo4
