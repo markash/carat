@@ -7,7 +7,7 @@
         <!-- property name="deploymentExportPath">target/</property -->
     </engine>
 
-    <container qualifier="jetty" default="true">
+    <container qualifier="jetty" default="false">
         <configuration>
             <property name="bindHttpPort">9595</property>
         </configuration>
