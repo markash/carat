@@ -41,26 +41,12 @@
             <artifactId>bootstrap</artifactId>
             <version>2.3.2</version>
         </dependency>
-        <!--
         <dependency>
-            <groupId>pl.com.it-crowd.mock-contexts-extension</groupId>
-            <artifactId>mock-contexts-extension-api</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <version>0.7-groovy-2.0</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>pl.com.it-crowd.mock-contexts-extension</groupId>
-            <artifactId>mock-contexts-extension-impl</artifactId>
-            <version>0.1-SNAPSHOT</version>
-            <scope>runtime</scope>
-        </dependency>
-        -->
-        <!--<dependency>-->
-            <!--<groupId>org.jboss.arquillian.container</groupId>-->
-            <!--<artifactId>arquillian-jetty-embedded-9</artifactId>-->
-            <!--<version>1.0.0.CR2</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
         <!--<dependency>-->
             <!--<groupId>com.github.jsimone</groupId>-->
             <!--<artifactId>webapp-runner</artifactId>-->
@@ -428,6 +414,53 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <version>1.5</version>
+                <configuration>
+                    <providerSelection>1.7</providerSelection>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.gmaven.runtime</groupId>
+                        <artifactId>gmaven-runtime-1.7</artifactId>
+                        <version>1.5</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>org.codehaus.groovy</groupId>
+                                <artifactId>groovy-all</artifactId>
+                            </exclusion>
+                        </exclusions>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <version>2.1.6</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <!--
+            <plugin>
+                <groupId>org.spockframework</groupId>
+                <artifactId>spock-maven</artifactId>
+                <version>0.7-groovy-2.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>find-specs</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
         </plugins>
     </build>
     <profiles>
