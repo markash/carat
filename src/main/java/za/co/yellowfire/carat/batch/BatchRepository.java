@@ -2,6 +2,7 @@ package za.co.yellowfire.carat.batch;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import za.co.yellowfire.carat.db.Dao;
 
 import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
@@ -11,15 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-public class JobRepository {
+public class BatchRepository implements Dao<Batch> {
     private Map<String, Batch> batches;
     private JobOperator operator = BatchRuntime.getJobOperator();
 
-    public JobRepository() {
+    public BatchRepository() {
         this.batches = new HashMap<>();
     }
 
-    public JobRepository add(@NonNull Batch batch) throws JobException {
+    public BatchRepository add(@NonNull Batch batch) throws JobException {
         if (batch == null) { throw new JobException ("The job is not set"); }
         if (batch.getName() == null) { throw new JobException ("The job name is not set"); }
 
@@ -27,7 +28,7 @@ public class JobRepository {
         return this;
     }
 
-    public List<Batch> getBatches() {
+    public List<Batch> retrieve() {
         return new ArrayList<>(batches.values());
     }
 }

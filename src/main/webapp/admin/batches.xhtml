@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ct="http://www.yellowfire.co.za/carat"
+                template="/templates/main.xhtml">
+    <ui:define name="content">
+        <h:form id="batchForm" >
+            <div class="page-header"><h2>Batches</h2></div>
+            <h:dataTable value="#{batchController.batches}" var="o"
+                         first="#{batchController.batches.first}" rows="#{batchController.batches.rowCount}"
+                         styleClass="table table-striped table-bordered table-condensed table-hover">
+                <h:column><f:facet name="header">Name</f:facet>#{o.name}</h:column>
+                <h:column><f:facet name="header">Properties</f:facet>#{o.propertiesAsCsv}</h:column>
+                <h:column><f:facet name="header">Status</f:facet>#{o.lastExecution.status}</h:column>
+                <h:column><f:facet name="header">Exit Status</f:facet>#{o.lastExecution.status}</h:column>
+                <h:column><f:facet name="header">Started</f:facet>#{o.lastExecution.startTime}</h:column>
+                <h:column><f:facet name="header">Ended</f:facet>#{o.lastExecution.endTime}</h:column>
+                <h:column><f:facet name="header">Execution</f:facet>#{o.lastExecution.executionId}</h:column>
+                <h:column><f:facet name="header">Instance</f:facet>#{o.lastExecution.instanceId}</h:column>
+            </h:dataTable>
+            <ct:pagination id="userPagination" bean="#{batchController.batches}" />
+        </h:form>
+    </ui:define>
+</ui:composition>

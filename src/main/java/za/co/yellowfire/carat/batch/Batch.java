@@ -35,6 +35,15 @@ public class Batch {
         return new Properties(this.props);
     }
 
+    public String getPropertiesAsCsv() {
+        final StringBuilder builder = new StringBuilder();
+        for (Map.Entry<Object, Object> entry : props.entrySet()) {
+            if (builder.length() > 0) { builder.append(","); }
+            builder.append(entry.getKey()).append("=").append(entry.getValue());
+        }
+        return builder.toString();
+    }
+
     public Batch property(String name, String value) {
         this.setProperty(name, value);
         return this;
@@ -47,6 +56,32 @@ public class Batch {
 
     public List<JobInstance> getInstances(int start, int count) {
         return operator.getJobInstances(this.name, start, count);
+    }
+
+    public BatchExecution getLastExecution() {
+        final int count = operator.getJobInstanceCount(this.name);
+        if (count > 0) {
+            /* Job Instances are ordered in desc order so get the first item will be the last execution */
+            List<JobInstance> instances = operator.getJobInstances(this.name, 0, 1);
+            if (instances.size() > 0) {
+                List<JobExecution> executions = operator.getJobExecutions(instances.get(0));
+                if (executions.size() > 0) {
+                    JobExecution execution = executions.get(executions.size() - 1);
+                    return new BatchExecution(
+                            instances.get(0).getInstanceId(),
+                            execution.getExecutionId(),
+                            execution.getJobName(),
+                            execution.getBatchStatus(),
+                            execution.getStartTime(),
+                            execution.getEndTime(),
+                            execution.getExitStatus(),
+                            execution.getCreateTime(),
+                            execution.getLastUpdatedTime(),
+                            execution.getJobParameters());
+                }
+            }
+        }
+        return new BatchExecution();
     }
 
     public List<BatchExecution> getLastExecutions(int count) {

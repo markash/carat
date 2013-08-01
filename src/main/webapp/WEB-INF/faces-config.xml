@@ -15,11 +15,20 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
+        <description>Batches</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>batches</from-outcome>
+            <to-view-id>/admin/batches.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
         <description>Users</description>
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>users</from-outcome>
-            <to-view-id>/admin/users.jsf</to-view-id>
+            <to-view-id>/admin/users.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

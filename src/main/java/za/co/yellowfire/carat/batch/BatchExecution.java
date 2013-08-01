@@ -2,13 +2,14 @@ package za.co.yellowfire.carat.batch;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.batch.runtime.BatchStatus;
 import java.util.Date;
 import java.util.Properties;
 
-@Slf4j @AllArgsConstructor
+@Slf4j @AllArgsConstructor @NoArgsConstructor
 public class BatchExecution {
     @Getter
     private long instanceId;

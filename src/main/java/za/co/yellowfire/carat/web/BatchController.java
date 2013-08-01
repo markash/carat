@@ -1,38 +1,27 @@
 package za.co.yellowfire.carat.web;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import za.co.yellowfire.carat.batch.Batch;
-import za.co.yellowfire.carat.batch.JobException;
-import za.co.yellowfire.carat.batch.JobRepository;
+import za.co.yellowfire.carat.batch.BatchManager;
+import za.co.yellowfire.carat.db.DataAccessException;
 
-import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.List;
 
-@Named @ViewScoped @Slf4j
+@Slf4j @ViewScoped @Named
 public class BatchController {
 
-    @Getter @Setter
-    private JobRepository repository;
+    @Inject
+    private BatchManager manager;
+    private transient MemoryPageableDataModel<Batch> batches;
 
-    @PostConstruct
-    public void init() {
-        repository = new JobRepository();
-        try {
-            repository.add(new Batch("alwaysFail1").property("sleepTime", "5"));
-        } catch (JobException e) {
-            log.error("Unable to add job to repository", e);
+    @RequiresRoles("ADMIN")
+    public MemoryPageableDataModel<Batch> getBatches() throws DataAccessException {
+        if (this.batches == null) {
+            this.batches = new MemoryPageableDataModel<>(manager.getRepository());
         }
-    }
-
-    public List<Batch> getBatches() {
-        return repository.getBatches();
-    }
-
-    public String onSubmit() {
-        return "success";
+        return batches;
     }
 }
