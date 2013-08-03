@@ -58,7 +58,7 @@ public class PostgresSQLPersistenceManagerImpl extends JDBCPersistenceManagerImp
         log.trace("Entering setSchemaOnConnection()");
 
         PreparedStatement ps = null;
-        ps = connection.prepareStatement("set search_path to " + schema + ", public");
+        ps = connection.prepareStatement("set search_path to public");
         //ps.setString(1, schema);
         ps.executeUpdate();
 
