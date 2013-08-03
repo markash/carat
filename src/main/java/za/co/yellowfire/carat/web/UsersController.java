@@ -1,15 +1,17 @@
 package za.co.yellowfire.carat.web;
 
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.shiro.authz.annotation.RequiresRoles;
+
 import za.co.yellowfire.carat.db.DataAccessException;
 import za.co.yellowfire.carat.db.User;
 import za.co.yellowfire.carat.db.UserDao;
 import za.co.yellowfire.carat.security.annotations.ShiroSecured;
-
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 @Named @ViewScoped @Slf4j @ShiroSecured
 public class UsersController {

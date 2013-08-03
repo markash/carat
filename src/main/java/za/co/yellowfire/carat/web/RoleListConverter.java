@@ -1,11 +1,12 @@
 package za.co.yellowfire.carat.web;
 
-import org.omnifaces.converter.ListConverter;
-import za.co.yellowfire.carat.db.Role;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
+
+import org.omnifaces.converter.ListConverter;
+
+import za.co.yellowfire.carat.db.Role;
 
 @FacesConverter("carat.RolesListConverter")
 public class RoleListConverter extends ListConverter {

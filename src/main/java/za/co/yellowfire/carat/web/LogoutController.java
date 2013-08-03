@@ -1,11 +1,12 @@
 package za.co.yellowfire.carat.web;
 
-import org.apache.shiro.SecurityUtils;
-import org.omnifaces.util.Faces;
+import java.io.IOException;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import java.io.IOException;
+
+import org.apache.shiro.SecurityUtils;
+import org.omnifaces.util.Faces;
 
 @Named @RequestScoped
 public class LogoutController {

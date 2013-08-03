@@ -18,6 +18,12 @@
                 <h:column><f:facet name="header">Ended</f:facet>#{o.lastExecution.endTime}</h:column>
                 <h:column><f:facet name="header">Execution</f:facet>#{o.lastExecution.executionId}</h:column>
                 <h:column><f:facet name="header">Instance</f:facet>#{o.lastExecution.instanceId}</h:column>
+                <h:column>
+                    <f:facet name="header">Options</f:facet>
+                    <h:commandButton id="batch_start_option_btn" actionListener="#{o.onStart}" value="Start" render="#{o.startable}" />
+                    <h:commandButton id="batch_pause_option_btn" actionListener="#{o.onStop}" value="Stop" render="#{o.stoppable}" />   
+                    <h:commandButton id="batch_resume_option_btn" actionListener="#{o.onResume}" value="Resume" render="#{o.resumable}" /> 
+                </h:column>
             </h:dataTable>
             <ct:pagination id="userPagination" bean="#{batchController.batches}" />
         </h:form>

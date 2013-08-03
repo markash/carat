@@ -1,14 +1,22 @@
 package za.co.yellowfire.carat.batch;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+import javax.batch.operations.JobOperator;
+import javax.batch.operations.NoSuchJobException;
+import javax.batch.runtime.JobExecution;
+import javax.batch.runtime.JobInstance;
+import javax.faces.event.ActionEvent;
+
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
-import javax.batch.operations.JobOperator;
-import javax.batch.runtime.JobExecution;
-import javax.batch.runtime.JobInstance;
-import java.util.*;
 
 @Slf4j
 public class Batch {
@@ -17,7 +25,9 @@ public class Batch {
     private Properties props = new Properties();
     @Getter @Setter
     private JobOperator operator;
-
+    private BatchExecution lastExecution;
+    private long currentExecutionId;
+    
     public Batch(@NonNull String name) {
         this.name = name;
     }
@@ -58,9 +68,89 @@ public class Batch {
         return operator.getJobInstances(this.name, start, count);
     }
 
+    public boolean isStartable() {
+    	final BatchExecution le = getLastExecution();
+    	if (le == null) {
+    		return true;
+    	} else if (le.getStatus() == null) {
+    		return true;
+    	} else if (le.getStatus().equals("STARTED")) {
+    		return false;
+    	} else if (le.getStatus().equals("COMPLETED")) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+    
+    public boolean isStoppable() {
+    	return !isStartable();
+    }
+    
+    public boolean isResumable() {
+    	final BatchExecution le = getLastExecution();
+    	if (le != null && le.getStatus() != null) {
+    		if (le.getStatus().equals("STOPPING") || le.getStatus().equals("STOPPED")) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    public void onStart(ActionEvent event) {
+        this.currentExecutionId = operator.start(this.name, this.props);
+        
+        JobExecution execution = operator.getJobExecution(this.currentExecutionId);
+        this.lastExecution = new BatchExecution(
+                0,
+                execution.getExecutionId(),
+                execution.getJobName(),
+                execution.getBatchStatus(),
+                execution.getStartTime(),
+                execution.getEndTime(),
+                execution.getExitStatus(),
+                execution.getCreateTime(),
+                execution.getLastUpdatedTime(),
+                execution.getJobParameters());
+        
+    }
+    
+    public void onStop(ActionEvent event) {
+        operator.stop(currentExecutionId);
+        
+        JobExecution execution = operator.getJobExecution(this.currentExecutionId);
+        this.lastExecution = new BatchExecution(
+                0,
+                execution.getExecutionId(),
+                execution.getJobName(),
+                execution.getBatchStatus(),
+                execution.getStartTime(),
+                execution.getEndTime(),
+                execution.getExitStatus(),
+                execution.getCreateTime(),
+                execution.getLastUpdatedTime(),
+                execution.getJobParameters());
+    }
+    
+    public void onResume(ActionEvent event) {
+        operator.restart(this.currentExecutionId, this.props);
+        
+        JobExecution execution = operator.getJobExecution(this.currentExecutionId);
+        this.lastExecution = new BatchExecution(
+                0,
+                execution.getExecutionId(),
+                execution.getJobName(),
+                execution.getBatchStatus(),
+                execution.getStartTime(),
+                execution.getEndTime(),
+                execution.getExitStatus(),
+                execution.getCreateTime(),
+                execution.getLastUpdatedTime(),
+                execution.getJobParameters());
+    }
+    
     public BatchExecution getLastExecution() {
-        final int count = operator.getJobInstanceCount(this.name);
-        if (count > 0) {
+    	try {
             /* Job Instances are ordered in desc order so get the first item will be the last execution */
             List<JobInstance> instances = operator.getJobInstances(this.name, 0, 1);
             if (instances.size() > 0) {
@@ -80,7 +170,10 @@ public class Batch {
                             execution.getJobParameters());
                 }
             }
-        }
+    	} catch (NoSuchJobException e) {
+    		/* NoSuchJobException is thrown when the job could not be loaded and when there are no executions ;-S */
+    		log.warn("No job instances for name {}", this.name);
+    	}
         return new BatchExecution();
     }
 
