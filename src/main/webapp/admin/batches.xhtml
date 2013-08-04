@@ -20,9 +20,9 @@
                 <h:column><f:facet name="header">Instance</f:facet>#{o.lastExecution.instanceId}</h:column>
                 <h:column>
                     <f:facet name="header">Options</f:facet>
-                    <h:commandButton id="batch_start_option_btn" actionListener="#{o.onStart}" value="Start" render="#{o.startable}" />
-                    <h:commandButton id="batch_pause_option_btn" actionListener="#{o.onStop}" value="Stop" render="#{o.stoppable}" />   
-                    <h:commandButton id="batch_resume_option_btn" actionListener="#{o.onResume}" value="Resume" render="#{o.resumable}" /> 
+                    <h:commandButton id="batch_start_option_btn" actionListener="#{o.onStart}" value="Start" rendered="#{o.startable}" styleClass="btn btn-success"/>
+                    <h:commandButton id="batch_pause_option_btn" actionListener="#{o.onStop}" value="Stop" rendered="#{o.stoppable}" styleClass="btn btn-danger"/>   
+                    <h:commandButton id="batch_resume_option_btn" actionListener="#{o.onResume}" value="Resume" rendered="#{o.resumable}" styleClass="btn btn-warning"/> 
                 </h:column>
             </h:dataTable>
             <ct:pagination id="userPagination" bean="#{batchController.batches}" />

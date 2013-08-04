@@ -11,6 +11,7 @@ import javax.batch.operations.JobOperator;
 import javax.batch.operations.NoSuchJobException;
 import javax.batch.runtime.JobExecution;
 import javax.batch.runtime.JobInstance;
+import javax.batch.runtime.BatchStatus;
 import javax.faces.event.ActionEvent;
 
 import lombok.Getter;
@@ -26,7 +27,6 @@ public class Batch {
     @Getter @Setter
     private JobOperator operator;
     private BatchExecution lastExecution;
-    private long currentExecutionId;
     
     public Batch(@NonNull String name) {
         this.name = name;
@@ -69,38 +69,50 @@ public class Batch {
     }
 
     public boolean isStartable() {
-    	final BatchExecution le = getLastExecution();
-    	if (le == null) {
-    		return true;
-    	} else if (le.getStatus() == null) {
-    		return true;
-    	} else if (le.getStatus().equals("STARTED")) {
-    		return false;
-    	} else if (le.getStatus().equals("COMPLETED")) {
-    		return true;
-    	} else {
-    		return false;
-    	}
+	final BatchExecution le = getLastExecution();	
+	boolean result = false;
+	if (le != null) {
+		switch(le.getStatus()) {
+            case STARTING: result = true; break;
+		    case COMPLETED: result = true; break;
+		    default: result = false;
+		}
+	} else {
+		result = true;
+	}
+	return result;
     }
     
     public boolean isStoppable() {
-    	return !isStartable();
+	final BatchExecution le = getLastExecution();	
+	boolean result = false;
+	if (le != null) {
+		switch(le.getStatus()) {
+		case STARTED: result = true; break;
+		default: result = false;
+		}
+	} else {
+		result = true;
+	}
+	return result;
     }
     
     public boolean isResumable() {
     	final BatchExecution le = getLastExecution();
+	boolean result = false;
     	if (le != null && le.getStatus() != null) {
-    		if (le.getStatus().equals("STOPPING") || le.getStatus().equals("STOPPED")) {
-    			return true;
-    		}
+		switch(le.getStatus()) {
+		case STOPPING: result = true; break; 
+		case STOPPED: result = true; break;
+		default: result = false;
+		}
     	}
-    	return false;
+    	return result;
     }
     
     public void onStart(ActionEvent event) {
-        this.currentExecutionId = operator.start(this.name, this.props);
-        
-        JobExecution execution = operator.getJobExecution(this.currentExecutionId);
+        final long currentExecutionId = operator.start(this.name, this.props);
+        JobExecution execution = operator.getJobExecution(currentExecutionId);
         this.lastExecution = new BatchExecution(
                 0,
                 execution.getExecutionId(),
@@ -116,9 +128,14 @@ public class Batch {
     }
     
     public void onStop(ActionEvent event) {
+	final BatchExecution le = getLastExecution();	
+	if (le != null) {
+	final long currentExecutionId = le.getExecutionId();
+	/* Determine if the batch is stoppable */
+	/* Stop the batch */
         operator.stop(currentExecutionId);
-        
-        JobExecution execution = operator.getJobExecution(this.currentExecutionId);
+	/* Refresh the batch execution status */        
+        JobExecution execution = operator.getJobExecution(currentExecutionId);
         this.lastExecution = new BatchExecution(
                 0,
                 execution.getExecutionId(),
@@ -130,12 +147,18 @@ public class Batch {
                 execution.getCreateTime(),
                 execution.getLastUpdatedTime(),
                 execution.getJobParameters());
+	}
     }
     
     public void onResume(ActionEvent event) {
-        operator.restart(this.currentExecutionId, this.props);
-        
-        JobExecution execution = operator.getJobExecution(this.currentExecutionId);
+	final BatchExecution le = getLastExecution();	
+	if (le != null) {
+	final long currentExecutionId = le.getExecutionId();
+	/* Determine if the batch is resumeable */
+	/* Resume the batch */
+        operator.restart(currentExecutionId, this.props);  
+	/* Refresh the batch execution status */        
+        JobExecution execution = operator.getJobExecution(currentExecutionId);
         this.lastExecution = new BatchExecution(
                 0,
                 execution.getExecutionId(),
@@ -147,16 +170,18 @@ public class Batch {
                 execution.getCreateTime(),
                 execution.getLastUpdatedTime(),
                 execution.getJobParameters());
+	}
     }
     
     public BatchExecution getLastExecution() {
     	try {
-            /* Job Instances are ordered in desc order so get the first item will be the last execution */
+            /* Job Instances are ordered in desc order so get the first item will be the last instance */
             List<JobInstance> instances = operator.getJobInstances(this.name, 0, 1);
             if (instances.size() > 0) {
                 List<JobExecution> executions = operator.getJobExecutions(instances.get(0));
+                /* Job Executions are ordered in desc order so get the first item will be the last execution */
                 if (executions.size() > 0) {
-                    JobExecution execution = executions.get(executions.size() - 1);
+                    JobExecution execution = executions.get(0);
                     return new BatchExecution(
                             instances.get(0).getInstanceId(),
                             execution.getExecutionId(),
