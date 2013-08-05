@@ -2,10 +2,6 @@ package za.co.yellowfire.carat.security;
 
 import lombok.extern.slf4j.Slf4j;
 
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
-import java.util.Map;
-
 /**
  * http://blog.eisele.net/2012/03/java-ee-6-example-enhance-security-with.html
  */

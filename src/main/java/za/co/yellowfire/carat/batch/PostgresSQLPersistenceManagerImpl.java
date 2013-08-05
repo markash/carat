@@ -1,15 +1,16 @@
 package za.co.yellowfire.carat.batch;
 
-import com.ibm.jbatch.container.exception.BatchContainerServiceException;
-import com.ibm.jbatch.container.exception.PersistenceException;
-import com.ibm.jbatch.container.services.impl.JDBCPersistenceManagerImpl;
-import com.ibm.jbatch.spi.services.IBatchConfig;
-import lombok.extern.slf4j.Slf4j;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import lombok.extern.slf4j.Slf4j;
+
+import com.ibm.jbatch.container.exception.BatchContainerServiceException;
+import com.ibm.jbatch.container.exception.PersistenceException;
+import com.ibm.jbatch.container.services.impl.JDBCPersistenceManagerImpl;
+import com.ibm.jbatch.spi.services.IBatchConfig;
 
 @Slf4j
 public class PostgresSQLPersistenceManagerImpl extends JDBCPersistenceManagerImpl {
@@ -58,7 +59,7 @@ public class PostgresSQLPersistenceManagerImpl extends JDBCPersistenceManagerImp
         log.trace("Entering setSchemaOnConnection()");
 
         PreparedStatement ps = null;
-        ps = connection.prepareStatement("set search_path to " + schema + ", public");
+        ps = connection.prepareStatement("set search_path to public");
         //ps.setString(1, schema);
         ps.executeUpdate();
 

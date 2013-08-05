@@ -1,19 +1,21 @@
 package za.co.yellowfire.carat.web;
 
+import java.util.List;
+
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+
 import org.omnifaces.util.Messages;
+
 import za.co.yellowfire.carat.db.DataAccessException;
 import za.co.yellowfire.carat.db.Role;
 import za.co.yellowfire.carat.db.User;
 import za.co.yellowfire.carat.db.UserDao;
-
-import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.util.List;
 
 @Named @ViewScoped @Slf4j
 public class ProfileController {

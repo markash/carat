@@ -1,12 +1,11 @@
 package za.co.yellowfire.carat.metrics;
 
+import javax.servlet.ServletContextEvent;
+
 import com.codahale.metrics.JmxReporter;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.codahale.metrics.servlets.AdminServletContextListener;
-
-import javax.enterprise.inject.Produces;
-import javax.servlet.ServletContextEvent;
 
 public class MetricsAdminServletContextListener extends AdminServletContextListener {
 

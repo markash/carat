@@ -1,15 +1,16 @@
 package za.co.yellowfire.carat.batch;
 
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
-import za.co.yellowfire.carat.db.Dao;
-
-import javax.batch.operations.JobOperator;
-import javax.batch.runtime.BatchRuntime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.batch.operations.JobOperator;
+import javax.batch.runtime.BatchRuntime;
+
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+import za.co.yellowfire.carat.db.Dao;
 
 @Slf4j
 public class BatchRepository implements Dao<Batch> {

@@ -1,13 +1,14 @@
 package za.co.yellowfire.carat.batch;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
-import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Named @ApplicationScoped @Slf4j
 public class BatchManager {
@@ -19,7 +20,7 @@ public class BatchManager {
     public void init() {
         repository = new BatchRepository();
         try {
-            repository.add(new Batch("runtimejunit.alwaysFails1").property("sleepTime", "5"));
+            repository.add(new Batch("alwaysFail1").property("sleepTime", "50"));
         } catch (JobException e) {
             BatchManager.log.error("Unable to add job to repository", e);
         }
