@@ -23,6 +23,10 @@
         <dependency.jdbi.version>2.49</dependency.jdbi.version>
         <dependency.postgres.version>9.1-901.jdbc4</dependency.postgres.version>
         <dependency.jetty.version>9.0.4.v20130625</dependency.jetty.version>
+        <oracleMiddlewareHome>C:/SDE/servers/wls12120</oracleMiddlewareHome>
+        <oracleServerUrl>t3://localhost:7001</oracleServerUrl>
+        <!--oracleUserName and oraclePassword specified in settings.xml -->
+        <oracleServerName>myserver</oracleServerName>
     </properties>
 
     <dependencies>
@@ -495,6 +499,38 @@
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
+        </profile>
+        <profile>
+            <id>weblogic-local</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.oracle.weblogic</groupId> 
+                        <artifactId>weblogic-maven-plugin</artifactId> 
+                        <version>12.1.2-0-0</version> 
+                        <configuration> 
+                          <middlewareHome>${oracleMiddlewareHome}</middlewareHome>
+                        </configuration> 
+                        <executions>
+                          <execution>
+                            <phase>pre-integration-test</phase> 
+                            <goals> 
+                              <goal>deploy</goal> 
+                            </goals>
+                            <configuration> 
+                              <adminurl>${oracleServerUrl}</adminurl>
+                              <user>${oracleUsername}</user> 
+                              <password>${oraclePassword}</password>
+                              <source>${project.build.directory}/${project.build.finalName}.${project.packaging}</source>
+                              <targets>${oracleServerName}</targets>
+                              <verbose>true</verbose> 
+                              <name>${project.build.finalName}</name>
+                            </configuration> 
+                          </execution> 
+                        </executions>
+                      </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 
