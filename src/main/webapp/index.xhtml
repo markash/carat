@@ -1,11 +1,17 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
                 xmlns:ct="http://yellowfire.co.za/carat"
                 template="/templates/main.xhtml">
     <ui:define name="content">
-        <ct:hello />
+
         <h:form id="helloForm" >
+            <ct:pieChart widgetVar="test"  />
+
+            <ui:remove>
+            <!--
             <h:dataTable value="#{indexController.items}" var="o"
                          first="#{indexController.first}" rows="#{indexController.rows}"
                          styleClass="table table-striped table-bordered table-condensed table-hover" >
@@ -24,10 +30,26 @@
 
                 </ul>
             </div>
-
             <h:graphicImage id="waveImg" url="#{resource['wave.med.gif']}" />
-            <h:inputText id="username" value="#{indexController.name}"/>
-            <h:commandButton id="submit" action="#{indexController.onSubmit()}" value="Submit" styleClass="btn"/>
+            -->
+            </ui:remove>
+
+            <h:panelGrid columns="2">
+                <h:outputLabel id="title_label" for="title" value="Title"/>
+                <h:panelGroup>
+                    <h:selectOneMenu id="title" value="#{indexController.title}">
+                        <f:selectItem itemValue="Select One" noSelectionOption="true" />
+                        <f:selectItem itemValue="Mr" itemDescription="Mr"  />
+                        <f:selectItem itemValue="Mrs" itemDescription="Mrs" />
+                        <f:ajax event="valueChange" listener="#{indexController.onTitleUpdate}" execute="@this" render="title_output" />
+                    </h:selectOneMenu>
+                    <h:outputText id="title_output" value="#{indexController.title}" />
+                </h:panelGroup>
+                <h:outputLabel id="username_label" for="username" value="Username"/>
+                <h:inputText id="username" value="#{indexController.name}"/>
+            </h:panelGrid>
+            <h:commandButton id="submit" action="#{indexController.onSubmit()}" value="Submit" styleClass="btn btn-primary" type="button"/>
+            <button type="button" class="btn btn-default">Default</button>
         </h:form>
     </ui:define>
 </ui:composition>

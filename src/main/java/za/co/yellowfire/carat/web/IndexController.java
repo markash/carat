@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,7 +27,8 @@ public class IndexController implements Serializable {
 
     private List<Item> items;
     private String name;
-
+    @Getter @Setter
+    private String title;
     @Getter @Setter
     private int first;
 
@@ -52,6 +54,11 @@ public class IndexController implements Serializable {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public void onTitleUpdate(AjaxBehaviorEvent event) {
+        System.out.println("event = " + event);
+        System.out.println("event = " + getTitle());
     }
 
     public void onSubmit() {
