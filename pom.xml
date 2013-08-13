@@ -325,7 +325,7 @@
                 <configuration>
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
-                    <generatedSourcesDirectory>${generated.sources}</generatedSourcesDirectory>
+                    <!--generatedSourcesDirectory>${generated.sources}</generatedSourcesDirectory-->
                 </configuration>
             </plugin>
             <plugin>

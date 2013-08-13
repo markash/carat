@@ -10,6 +10,14 @@
         <param-value>Carat</param-value>
     </context-param>
     <context-param>
+        <param-name>za.co.yellowfire.carat.web.SHOW_LOGO</param-name>
+        <param-value>FALSE</param-value>
+    </context-param>
+    <context-param>
+        <param-name>za.co.yellowfire.carat.web.LOGO</param-name>
+        <param-value>logo.png</param-value>
+    </context-param>
+    <context-param>
         <param-name>za.co.yellowfire.carat.web.ISSUES_URL</param-name>
         <param-value>https://github.com/markash/carat/issues?state=open</param-value>
     </context-param>

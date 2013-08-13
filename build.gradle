@@ -1,0 +1,156 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'jooq'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'flyway'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+def srcJava = 'src/main/java'
+def srcDelomboked = 'build/src-delomboked'
+
+buildscript {
+  
+  
+  repositories {
+    mavenCentral()
+  //maven {
+  //	url "http://vt01ecs02.tb01.test.jse.co.za:9092/nexus/content/groups/public"
+  //}
+  }
+
+  dependencies {
+    classpath 'postgresql:postgresql:9.1-901.jdbc4'
+    classpath 'com.github.ben-manes:gradle-flyway-plugin:0.2'
+    classpath 'com.github.ben-manes:gradle-jooq-plugin:latest.integration'
+    classpath 'com.github.martins1930.gradle:JettyMulti:1.2.0-RELEASE'
+  }
+}
+
+apply plugin: 'jettymulti'
+
+repositories {
+  mavenCentral()
+	//maven {
+  //      url "http://vt01ecs02.tb01.test.jse.co.za:9092/nexus/content/groups/public"
+  //}
+}
+
+configurations {
+    jetty8
+}
+
+//configurations {
+//    compileOnly
+//    testCompileOnly { extendsFrom compileOnly }
+//}
+//
+//sourceSets {
+//    main {
+//        compileClasspath += configurations.compileOnly
+//    }
+//    test {
+//        compileClasspath += configurations.compileOnly + configurations.testCompileOnly
+//    }
+//}
+
+dependencies {
+	compile group: 'org.projectlombok',		name: 'lombok',				version: '0.11.8'
+	compile group: 'javax',       				name: 'javaee-web-api', 	version: '7.0'
+	compile group: 'javax.faces',    			name: 'javax.faces-api', 	version: '2.2'
+  compile group: 'org.omnifaces',				name: 'omnifaces',			version: '1.5'
+  compile group: 'org.glassfish',				name: 'javax.faces',		version: '2.2.0-m15'
+    
+  compile group: 'org.modelmapper', 			name: 'modelmapper',		version: '0.5.5'
+  compile group: 'org.jooq',					name: 'jooq',				version: '3.0.1'
+  compile group: 'org.jooq',					name: 'jooq-meta',			version: '3.0.1'
+  compile group: 'org.jooq',					name: 'jooq-codegen',		version: '3.0.1'
+  compile group: 'postgresql',				name: 'postgresql',			version: '9.1-901.jdbc4'
+
+  compile group: 'org.apache.shiro',			name: 'shiro-web',			version: '1.2.2'
+  compile group: 'org.apache.shiro',      name: 'shiro-core',      version: '1.2.2'
+  compile group: 'commons-logging',			name: 'commons-logging',	version: '1.1.1'
+  compile group: 'commons-beanutils',     name: 'commons-beanutils',  version: '1.8.3'
+  
+  compile group: 'com.codahale.metrics', 		name: 'metrics-core',		version: '3.0.0'
+  compile group: 'com.codahale.metrics', 		name: 'metrics-servlets',	version: '3.0.0'
+  compile group: 'com.codahale.metrics', 		name: 'metrics-servlet',	version: '3.0.0'
+  compile group: 'com.codahale.metrics', 		name: 'metrics-jdbi',		version: '3.0.0'
+
+  compile group: 'org.jboss.weld',      name: 'weld-core',      version: '2.0.1.Final'
+  compile group: 'org.jboss.weld.servlet',  name: 'weld-servlet',   version: '2.0.1.Final'
+
+  testCompile group: 'org.jboss.arquillian.testng',		name: 'arquillian-testng-container', 		version: '1.0.4.Final'
+  testCompile group: 'org.jboss.arquillian.container',	name: 'arquillian-weld-ee-embedded-1.1',	version: '1.0.0.CR7'
+  testCompile group: 'org.slf4j',							name: 'slf4j-simple',						version: '1.6.4'
+	testCompile group: 'org.testng', 						name: 'testng', 							version: '6.8.5' 
+  testCompile 'com.googlecode.flyway:flyway-core:2.1'
+
+  
+  jetty8 "org.eclipse.jetty:jetty-plus:$jetty8Version"
+  jetty8 "org.eclipse.jetty:jetty-runner:$jetty8Version"
+  jetty8 "org.eclipse.jetty:jetty-server:$jetty8Version"
+  jetty8 "org.eclipse.jetty:jetty-servlet:$jetty8Version"
+  jetty8 "org.eclipse.jetty:jetty-webapp:$jetty8Version"
+  jetty8 "org.eclipse.jetty:jetty-servlets:$jetty8Version"
+  jetty8 "org.eclipse.jetty:jetty-jsp:$jetty8Version"
+  jetty8 "javax.servlet:jstl:1.2"
+  jetty8 'postgresql:postgresql:9.1-901.jdbc4'
+  
+  
+}
+
+test {
+  useTestNG()
+}
+
+generateJooq.dependsOn(flywayMigrate)
+compileJava.dependsOn(generateJooq)
+
+flyway {
+  url = "jdbc:postgresql://localhost/carat-db"
+  schemas = [ 'public' ]
+  user 'carat-user'
+  password 'password1*'
+}
+
+generateJooq {
+  outputs.upToDateWhen {
+    !flywayMigrate.didWork
+  }
+}
+
+jooq {
+  jdbc {
+    url 'jdbc:postgresql://localhost/carat-db'
+    driver 'org.postgresql.Driver'
+    user 'carat-user'
+    password 'password1*'
+  }
+  generator {
+    database {
+      name 'org.jooq.util.postgres.PostgresDatabase'
+      inputSchema 'public'
+      includes '.*'
+    }
+    generate { 
+      deprecated false
+    }
+    target {
+      packageName 'za.co.yellowfire.carat.db.postgres'
+    }
+  }
+}
+
+jettyMulti {
+  jMPort = 8096 ;
+  jMScanInterval = 1 ;
+}
+
+task runJetty8(type: JavaExec) {
+    main = 'org.eclipse.jetty.runner.Runner'
+    args = ['build/libs/carat.war', 'src/main/webapp/WEB-INF/jetty-context.xml']
+    classpath configurations.jetty8
+}
