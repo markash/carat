@@ -76,3 +76,26 @@ there was a lot of debugging required to get it to work with PostgreSQL and in J
 CDI is in because it is part of the JEE 7.0 spec but it has been a rocky start to get it to work correctly with JSF (but that is always the case with JSF / CDI).
 
 [Wikipedia definition]: http://en.wikipedia.org/wiki/Carat_(mass)
+
+
+## Constructio
+
+### Postgres
+
+Pooling	Implementation Class
+No	org.postgresql.ds.PGSimpleDataSource
+Yes	org.postgresql.ds.PGPoolingDataSource
+
+Property	Type	Description
+serverName	String	PostgreSQL™ database server host name
+databaseName	String	PostgreSQL™ database name
+portNumber	int	TCP port which the PostgreSQL™ database server is listening on (or 0 to use the default port)
+user	String	User used to make database connections
+password	String	Password used to make database connections
+
+Additional
+
+Property	Type	Description
+dataSourceName	String	Every pooling DataSource must have a unique name.
+initialConnections	int	The number of database connections to be created when the pool is initialized.
+maxConnections	int	The maximum number of open database connections to allow. When more connections are requested, the caller will hang until a connection is returned to the pool.

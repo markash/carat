@@ -30,16 +30,31 @@
     </properties>
 
     <dependencies>
+        <!--************************************************************************************************************
+             Enterprise Edition
+        *************************************************************************************************************-->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--************************************************************************************************************
+             Database & Web
+        *************************************************************************************************************-->
         <dependency>
             <groupId>za.co.yellowfire</groupId>
             <artifactId>carat-db</artifactId>
-            <version>0.1.1</version>
+            <version>0.1.3</version>
         </dependency>
         <dependency>
             <groupId>za.co.yellowfire</groupId>
             <artifactId>carat-web</artifactId>
             <version>0.1.1</version>
         </dependency>
+        <!--************************************************************************************************************
+             Testing
+        *************************************************************************************************************-->
         <dependency>
             <groupId>org.spockframework</groupId>
             <artifactId>spock-core</artifactId>
@@ -83,6 +98,15 @@
 
     <build>
         <finalName>carat</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.3</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -261,6 +285,27 @@
                         <version>3.9.0.M1</version>
                     </dependency>
                     <dependency>
+                        <groupId>org.glassfish</groupId>
+                        <artifactId>javax.faces</artifactId>
+                        <version>2.2.1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.weld</groupId>
+                        <artifactId>weld-core</artifactId>
+                        <version>2.0.2.Final</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.weld.servlet</groupId>
+                        <artifactId>weld-servlet</artifactId>
+                        <version>2.0.2.Final</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>org.slf4j</groupId>
+                                <artifactId>slf4j-api</artifactId>
+                            </exclusion>
+                        </exclusions>
+                    </dependency>
+                    <dependency>
                         <groupId>com.codahale.metrics</groupId>
                         <artifactId>metrics-jetty9</artifactId>
                         <version>${dependency.metrics.version}</version>
@@ -270,11 +315,6 @@
                                 <artifactId>jetty-server</artifactId>
                             </exclusion>
                         </exclusions>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-simple</artifactId>
-                        <version>${dependency.slf4j.version}</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -494,6 +534,19 @@
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <packagingExcludes>
+                                WEB-INF/lib/slf4j-*.jar
+                            </packagingExcludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
         <profile>
             <id>weblogic-local</id>

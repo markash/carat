@@ -23,7 +23,7 @@
         <Arg>jdbc/carat</Arg>
         <Arg>
             <New class="org.postgresql.ds.PGSimpleDataSource">
-                <Set name="User">carat-user</Set>
+                <Set name="User">carat</Set>
                 <Set name="Password">password1*</Set>
                 <Set name="DatabaseName">carat-db</Set>
                 <Set name="ServerName">localhost</Set>

@@ -29,11 +29,15 @@ public class RegisterController {
     @Inject
     private UserDao userDao;
 
-    //TODO Remove DataAccessException
     @PostConstruct
-    public void init() throws DataAccessException {
-        this.user = new User();
-        this.roles = userDao.getRoles();
+    public void init() {
+        try {
+            this.user = new User();
+            this.roles = userDao.getRoles();
+        } catch (DataAccessException e) {
+            Messages.addGlobalError("Registration init failed: {0}", e.getMessage());
+            log.error("Registration init failed: {}", e.getMessage());
+        }
     }
 
     public void submit() {
