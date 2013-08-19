@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+    <resource-ref>
+        <res-ref-name>jdbc/batch</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <jndi-name>java:jboss/datasources/batch</jndi-name>
+    </resource-ref>
+    <resource-ref>
+        <res-ref-name>jdbc/carat</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <jndi-name>java:jboss/datasources/batch</jndi-name>
+    </resource-ref>
+</jboss-web>

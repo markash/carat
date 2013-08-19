@@ -418,6 +418,19 @@
             </build>
         </profile>
         <profile>
+            <id>wildfly</id>
+            <dependencies>
+                <!-- Add the Postgres library so that Shiro can instantiate it.
+                     TODO Shiro should potentially use the datasource defined by the container
+                -->
+                <dependency>
+                    <groupId>postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <version>${dependency.postgres.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
             <id>weblogic-local</id>
             <build>
                 <plugins>
