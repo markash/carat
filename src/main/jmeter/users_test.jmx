@@ -17,7 +17,7 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">25</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <longProp name="ThreadGroup.start_time">1376892430000</longProp>
         <longProp name="ThreadGroup.end_time">1376892430000</longProp>
@@ -42,7 +42,7 @@
           <stringProp name="RegexExtractor.regex">id=&quot;j_id1:javax.faces.ViewState:0&quot; value=\&quot;(.+?)\&quot;</stringProp>
           <stringProp name="RegexExtractor.template">$1$</stringProp>
           <stringProp name="RegexExtractor.default"></stringProp>
-          <stringProp name="RegexExtractor.match_number">0</stringProp>
+          <stringProp name="RegexExtractor.match_number">2</stringProp>
           <stringProp name="Sample.scope">all</stringProp>
           <stringProp name="Scope.variable"></stringProp>
         </RegexExtractor>
