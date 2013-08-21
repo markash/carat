@@ -8,7 +8,7 @@
 
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
+        <param-value>Production</param-value>
     </context-param>
 
     <context-param>
@@ -19,6 +19,15 @@
     <context-param>
         <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
         <param-value>client</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>org.omnifaces.CDN_RESOURCE_HANDLER_URLS</param-name>
+        <param-value>
+            webjars/bootstrap/3.0.0-rc.2/css:bootstrap.css=//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css,
+            webjars/bootstrap/3.0.0-rc.2/js:bootstrap.js=//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.js,
+            jquery.js=//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js
+        </param-value>
     </context-param>
 
     <listener>
