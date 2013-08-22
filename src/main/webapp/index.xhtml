@@ -6,35 +6,12 @@
                 template="/templates/main.xhtml">
     <ui:define name="content">
         <h:form id="f1" >
-
+            <h:messages id="messages" globalOnly="true" showDetail="true" showSummary="true" />
             <ct:jumbotron id="jt1"
                           heading="Hello, world!"
                           tagline="This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.">
-                <h:commandButton id="submit" action="users" value="Learn more" styleClass="btn btn-primary" type="button"/>
             </ct:jumbotron>
-
-
-
-            <ui:remove>
-            <!--
-            <div class="form-group">
-                <h:outputLabel id="title_label" for="title" value="Title"/>
-                <h:selectOneMenu id="title" value="#{indexController.title}" class="form-control">
-                    <f:selectItem itemValue="Select One" noSelectionOption="true" />
-                    <f:selectItem itemValue="Mr" itemDescription="Mr"  />
-                    <f:selectItem itemValue="Mrs" itemDescription="Mrs" />
-                    <f:ajax event="valueChange" listener="#{indexController.onTitleUpdate}" execute="@this" render="title_output" />
-                </h:selectOneMenu>
-                <h:outputText id="title_output" value="#{indexController.title}" />
-            </div>
-            <div class="form-group">
-                <h:outputLabel id="username_label" for="username" value="Username"/>
-                <h:inputText id="username" value="#{indexController.name}" class="form-control"/>
-            </div>
-            <h:commandButton id="submit" action="#{indexController.onSubmit()}" value="Submit" styleClass="btn btn-primary" type="button"/>
-            -->
-            </ui:remove>
-
+            <h:commandButton id="submit" value="Learn more" styleClass="btn btn-primary" actionListener="#{indexController.onLearnMore}"/>
         </h:form>
     </ui:define>
 </ui:composition>
