@@ -8,7 +8,7 @@
 
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Production</param-value>
+        <param-value>Development</param-value>
     </context-param>
 
     <context-param>
@@ -26,7 +26,7 @@
         <param-value>
             webjars/bootstrap/3.0.0-rc.2/css:bootstrap.css=//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css,
             webjars/bootstrap/3.0.0-rc.2/js:bootstrap.js=//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.js,
-            jquery.js=//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js
+            jquery.js=//code.jquery.com/jquery.js
         </param-value>
     </context-param>
 
