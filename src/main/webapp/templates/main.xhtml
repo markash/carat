@@ -19,29 +19,30 @@
     <div id="wrap">
         <div class="navbar navbar-inverse navbar-static-top">
             <div class="container">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"/>
-                    <span class="icon-bar"/>
-                    <span class="icon-bar"/>
-                </button>
                 <h:form id="headerForm">
-
-                    <h:commandLink value="#{initParam['za.co.yellowfire.carat.web.NAME']}" action="index" styleClass="navbar-brand" rendered="#{initParam['za.co.yellowfire.carat.web.SHOW_LOGO'] eq 'FALSE'}" />
-                    <h:commandLink action="index" styleClass="navbar-brand" rendered="#{initParam['za.co.yellowfire.carat.web.SHOW_LOGO'] eq 'TRUE'}">
-                        <h:graphicImage library="img" name="#{initParam['za.co.yellowfire.carat.web.LOGO']}" />
-                    </h:commandLink>
-                    <div class="nav-collapse collapse">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"/>
+                            <span class="icon-bar"/>
+                            <span class="icon-bar"/>
+                        </button>
+                        <h:commandLink value="#{initParam['za.co.yellowfire.carat.web.NAME']}" action="index" styleClass="navbar-brand" rendered="#{initParam['za.co.yellowfire.carat.web.SHOW_LOGO'] eq 'FALSE'}" />
+                        <h:commandLink action="index" styleClass="navbar-brand" rendered="#{initParam['za.co.yellowfire.carat.web.SHOW_LOGO'] eq 'TRUE'}">
+                            <h:graphicImage library="img" name="#{initParam['za.co.yellowfire.carat.web.LOGO']}" />
+                        </h:commandLink>
+                    </div>
+                    <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class=""><h:commandLink value="Home" action="index" /></li>
-                            <li class=""><h:commandLink value="Batches" action="batches" /></li>
-                            <li class=""><h:commandLink value="Users" action="users" /></li>
+                            <li><h:commandLink value="Home" action="index" /></li>
+                            <li><h:commandLink value="Batches" action="batches" /></li>
+                            <li><h:commandLink value="Users" action="users" /></li>
                         </ul>
-                        <ul class="nav navbar-nav pull-right">
-                            <li class=""><h:commandLink id="profileLink" value="#{request.remoteUser}" action="#{loginController.onViewProfile}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" >
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><h:commandLink id="profileLink" value="#{request.remoteUser}" action="#{loginController.onViewProfile}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" >
                                 <f:viewParam name="id" value="#{request.remoteUser}" />
                             </h:commandLink></li>
-                            <li class=""><h:commandLink id="logoutLink" value="Logout" action="#{logoutController.submit}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" /></li>
-                            <li class=""><h:commandLink id="loginLink" value="Login" action="login" styleClass="navbar-link" rendered="#{empty request.remoteUser}" /></li>
+                            <li><h:commandLink id="logoutLink" value="Logout" action="#{logoutController.submit}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" /></li>
+                            <li><h:commandLink id="loginLink" value="Login" action="login" styleClass="navbar-link" rendered="#{empty request.remoteUser}" /></li>
                         </ul>
                     </div>
                 </h:form>
