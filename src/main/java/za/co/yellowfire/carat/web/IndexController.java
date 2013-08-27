@@ -17,6 +17,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import za.co.yellowfire.carat.db.Item;
 import za.co.yellowfire.carat.db.ItemDao;
+import za.co.yellowfire.carat.jsf.i18n.MessageFactory;
 
 @Named
 @ViewScoped @Slf4j
@@ -135,6 +136,9 @@ public class IndexController implements Serializable {
     }
 
     public void onLearnMore(@SuppressWarnings("unused") ActionEvent event) {
+
+        MessageFactory.createMessage(FacesContext.getCurrentInstance(), "password");
+
         FacesContext.getCurrentInstance().addMessage(
                 null,
                 new FacesMessage(

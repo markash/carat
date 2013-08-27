@@ -7,6 +7,14 @@
         <resource-handler>org.omnifaces.resourcehandler.CDNResourceHandler</resource-handler>
     </application>
 
+    <application>
+        <resource-bundle>
+            <base-name>i8n</base-name>
+            <var>i8n</var>
+        </resource-bundle>
+        <message-bundle>i8n</message-bundle>
+    </application>
+
     <navigation-rule>
         <description>Home</description>
         <from-view-id>*</from-view-id>
@@ -90,4 +98,5 @@
             <redirect>false</redirect>
         </navigation-case>
     </navigation-rule>
+
 </faces-config>

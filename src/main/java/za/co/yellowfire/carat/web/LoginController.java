@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.validation.constraints.Min;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,9 @@ import org.omnifaces.util.Messages;
 public class LoginController {
     public static final String HOME_URL = "index.jsf";
 
+    @Min(5)
     private String username;
+    @Min(5)
     private String password;
     private boolean remember;
 

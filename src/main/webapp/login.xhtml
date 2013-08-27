@@ -8,19 +8,20 @@
     <ui:define name="content">
         <!-- includeViewParams="true" -->
         <h:form id="login">
+            <h:messages globalOnly="true" />
             <fieldset>
                 <legend>Login</legend>
-                <ct:formGroup for="username" label="Username">
-                    <h:inputText styleClass="form-control" id="username" value="#{loginController.username}" required="true" pt:placeholder="Username">
+                <ct:formGroup for="username" label="#{i8n['username']}">
+                    <h:inputText styleClass="form-control" id="username" value="#{loginController.username}" label="#{i8n['username']}" required="true" pt:placeholder="Username">
                         <f:ajax event="blur" render="m_username" />
                     </h:inputText>
                     <h:message id="m_username" for="username" />
                 </ct:formGroup>
 
-                <ct:formGroup for="password" label="Password">
-                    <h:inputText styleClass="form-control" id="password" value="#{loginController.password}" required="true" pt:placeholder="Password">
+                <ct:formGroup for="password" label="#{i8n['password']}">
+                    <h:inputSecret styleClass="form-control" id="password" value="#{loginController.password}" label="#{i8n['password']}" required="true" pt:placeholder="Password">
                         <f:ajax event="blur" render="m_password" />
-                    </h:inputText>
+                    </h:inputSecret>
                     <h:message id="m_password" for="password" />
                 </ct:formGroup>
 
@@ -31,7 +32,6 @@
                 <h:commandButton value="Login" action="#{loginController.submit}" styleClass="btn btn-primary">
                     <f:ajax execute="@form" render="@form" />
                 </h:commandButton>
-                <h:messages globalOnly="true" layout="table" />
             </fieldset>
         </h:form>
     </ui:define>
