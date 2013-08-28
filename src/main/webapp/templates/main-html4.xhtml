@@ -1,14 +1,16 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:p="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>#{initParam['za.co.yellowfire.carat.web.NAME']}::Index</title>
     <h:outputStylesheet library="webjars/bootstrap/3.0.0-rc.2/css"   name="bootstrap.css" />
     <h:outputStylesheet library="css"                                name="main.css" />
-    <h:outputScript     library="webjars/jquery/1.10.2"              name="jquery.min.js"     target="body" />
     <h:outputScript     library="webjars/bootstrap/3.0.0-rc.2/js"    name="bootstrap.js"      target="body" />
 
     <link rel="shortcut icon" type="image/png" href="resources/img/favicon.png" />
@@ -34,8 +36,10 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><h:commandLink value="Home" action="index" /></li>
-                            <li><h:commandLink value="Batches" action="batches" /></li>
-                            <li><h:commandLink value="Users" action="users" /></li>
+                            <c:if test="${request.isUserInRole('ADMIN')}">
+                                <li><h:commandLink value="Users" action="users" /></li>
+                            </c:if>
+                            <ui:insert name="nav"/>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><h:commandLink id="profileLink" value="#{request.remoteUser}" action="#{loginController.onViewProfile}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" >
