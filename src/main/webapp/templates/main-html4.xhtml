@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>#{initParam['za.co.yellowfire.carat.web.NAME']}::Index</title>
+    <h:outputStylesheet library="webjars/bootstrap/3.0.0-rc.2/css"   name="bootstrap.css" />
+    <h:outputStylesheet library="css"                                name="main.css" />
+    <h:outputScript     library="webjars/jquery/1.10.2"              name="jquery.min.js"     target="body" />
+    <h:outputScript     library="webjars/bootstrap/3.0.0-rc.2/js"    name="bootstrap.js"      target="body" />
+
+    <link rel="shortcut icon" type="image/png" href="resources/img/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <ui:insert name="head"/>
+</h:head>
+<h:body>
+    <div id="wrap">
+        <div class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <h:form id="headerForm">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"/>
+                            <span class="icon-bar"/>
+                            <span class="icon-bar"/>
+                        </button>
+                        <h:commandLink value="#{initParam['za.co.yellowfire.carat.web.NAME']}" action="index" styleClass="navbar-brand" rendered="#{initParam['za.co.yellowfire.carat.web.SHOW_LOGO'] eq 'FALSE'}" />
+                        <h:commandLink action="index" styleClass="navbar-brand" rendered="#{initParam['za.co.yellowfire.carat.web.SHOW_LOGO'] eq 'TRUE'}">
+                            <h:graphicImage library="img" name="#{initParam['za.co.yellowfire.carat.web.LOGO']}" />
+                        </h:commandLink>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><h:commandLink value="Home" action="index" /></li>
+                            <li><h:commandLink value="Batches" action="batches" /></li>
+                            <li><h:commandLink value="Users" action="users" /></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><h:commandLink id="profileLink" value="#{request.remoteUser}" action="#{loginController.onViewProfile}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" >
+                                <f:viewParam name="id" value="#{request.remoteUser}" />
+                            </h:commandLink></li>
+                            <li><h:commandLink id="logoutLink" value="Logout" action="#{logoutController.submit}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" /></li>
+                            <li><h:commandLink id="loginLink" value="Login" action="login" styleClass="navbar-link" rendered="#{empty request.remoteUser}" /></li>
+                        </ul>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+        <div class="container">
+            <ui:insert name="content"/>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="container">
+            <p>Designed and built by <a href="#{initParam['za.co.yellowfire.carat.web.DEVELOPER_URL']}" target="_blank">#{initParam['za.co.yellowfire.carat.web.DEVELOPER_NAME']}</a>.</p>
+            <p>Code licensed under <a href="#{initParam['za.co.yellowfire.carat.web.LICENSE_URL']}" target="_blank">#{initParam['za.co.yellowfire.carat.web.DEVELOPER_NAME']}</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+            <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+            <ul id="footer-links">
+                <li><a href="#{initParam['za.co.yellowfire.carat.web.BLOG']}">Blog</a></li>
+                <li class="muted"><h:outputText value="&amp;middot;" escape="false"/></li>
+                <li><a href="#{initParam['za.co.yellowfire.carat.web.ISSUES_URL']}">Issues</a></li>
+                <li class="muted"><h:outputText value="&amp;middot;" escape="false" /></li>
+                <li><a href="#{initParam['za.co.yellowfire.carat.web.CHANGELOG_URL']}">Changelog</a></li>
+            </ul>
+        </div>
+    </div>
+</h:body>
+</html>
