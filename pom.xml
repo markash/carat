@@ -427,17 +427,81 @@
                     </plugin>
                 </plugins>
             </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-webapp</artifactId>
+                    <version>9.0.4.v20130625</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>    <!-- Jetty plus and naming required for testing resource injections -->
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-plus</artifactId>
+                    <version>9.0.4.v20130625</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                    <artifactId>arquillian-jetty-embedded-9</artifactId>
+                    <version>${test.arquillian.jetty9.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
         </profile>
         <profile>
-            <id>wildfly</id>
+            <id>jboss</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
             <dependencies>
-                <!-- Add the Postgres library so that Shiro can instantiate it.
-                     TODO Shiro should potentially use the datasource defined by the container
-                -->
                 <dependency>
                     <groupId>postgresql</groupId>
                     <artifactId>postgresql</artifactId>
                     <version>${dependency.postgres.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.spec</groupId>
+                    <artifactId>jboss-javaee-web-6.0</artifactId>
+                    <version>2.0.0.Final</version>
+                    <type>pom</type>
+                    <scope>provided</scope>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.apache.xalan</groupId>
+                            <artifactId>xalan</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <dependency>
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
+                    <version>7.1.1.Final</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>wildfly</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <!--<dependency>-->
+                    <!--<groupId>javax.inject</groupId>-->
+                    <!--<artifactId>javax.inject</artifactId>-->
+                    <!--<scope>test</scope>-->
+                <!--</dependency>-->
+                <dependency>
+                    <groupId>org.jboss.spec.javax.servlet</groupId>
+                    <artifactId>jboss-servlet-api_3.1_spec</artifactId>
+                    <version>1.0.0.Alpha1</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.wildfly</groupId>
+                    <artifactId>wildfly-arquillian-container-remote</artifactId>
+                    <version>8.0.0.Alpha4</version>
+                    <scope>test</scope>
                 </dependency>
             </dependencies>
         </profile>
