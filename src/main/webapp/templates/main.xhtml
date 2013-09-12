@@ -43,15 +43,17 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                                <li>
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    <h:commandLink id="profileLink" value="#{request.remoteUser}" action="#{loginController.onViewProfile}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" >
-                                        <f:viewParam name="id" value="#{request.remoteUser}" />
-                                    </h:commandLink>
-                                </li>
-                                <li><h:commandLink id="logoutLink" value="Logout" action="#{logoutController.submit}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" /></li>
-                                <li><h:commandLink id="loginLink" value="Login" action="login" styleClass="navbar-link" rendered="#{empty request.remoteUser}" /></li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> #{request.remoteUser}<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+
+                                        <h:commandLink id="profileLink" value="Profile" action="#{loginController.onViewProfile}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" >
+                                            <f:viewParam name="id" value="#{request.remoteUser}" />
+                                        </h:commandLink>
+                                    </li>
+                                    <li><h:commandLink id="logoutLink" value="Logout" action="#{logoutController.submit}" styleClass="navbar-link" rendered="#{not empty request.remoteUser}" /></li>
+                                    <li><h:commandLink id="loginLink" value="Login" action="login" styleClass="navbar-link" rendered="#{empty request.remoteUser}" /></li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
