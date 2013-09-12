@@ -61,12 +61,14 @@
             <version>0.7-groovy-2.0</version>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.github.jsimone</groupId>-->
-            <!--<artifactId>webapp-runner</artifactId>-->
-            <!--<version>7.0.22</version>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
+        <!--************************************************************************************************************
+             Infrastructure
+        *************************************************************************************************************-->
+        <dependency>
+            <groupId>org.glassfish.main.extras</groupId>
+            <artifactId>glassfish-embedded-web</artifactId>
+            <version>4.0</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -123,6 +125,28 @@
                             <sources>
                                 <source>target/generated-sources</source>
                             </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>1.1.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>assemble</goal>
+                        </goals>
+                        <configuration>
+                            <assembleDirectory>target</assembleDirectory>
+                            <programs>
+                                <program>
+                                    <mainClass>za.co.yellowfire.heroku.Main</mainClass>
+                                    <name>webapp</name>
+                                </program>
+                            </programs>
                         </configuration>
                     </execution>
                 </executions>
@@ -481,6 +505,27 @@
             </dependencies>
         </profile>
         <profile>
+            <id>glassfish4</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.glassfish.embedded</groupId>
+                        <artifactId>maven-embedded-glassfish-plugin</artifactId>
+                        <version>4.0</version>
+                        <configuration>
+                            <app>carat.war</app>
+                            <port>8080</port>
+                            <contextRoot>/carat</contextRoot>
+                            <autoDelete>true</autoDelete>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>wildfly</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
@@ -539,24 +584,10 @@
         </profile>
     </profiles>
 
-    <!--
     <repositories>
         <repository>
-            <id>it-crowd.com.pl</id>
-            <url>http://artifactory.it-crowd.com.pl/repo</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+            <id>glassfish-releases</id>
+            <url>http://download.java.net/maven/glassfish</url>
         </repository>
     </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>it-crowd.com.pl</id>
-            <url>http://artifactory.it-crowd.com.pl/repo</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-    -->
 </project>
