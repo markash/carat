@@ -9,6 +9,9 @@ import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * https://github.com/jsimone/embeddedGlassfishSample
+ */
 @Slf4j
 public class Main {
     public static void main(String...args) throws Exception {
