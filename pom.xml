@@ -611,5 +611,9 @@
             <id>yellowfire-releases</id>
             <url>http://www.yellowfire.co.za/repository</url>
         </repository>
+        <repository>
+            <id>yellowfire-local</id>
+            <url>file:${basedir}/repo</url>
+        </repository>
     </repositories>
 </project>
