@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>za.co.yellowfire</groupId>
+    <artifactId>carat-glassfish-heroku</artifactId>
+    <packaging>jar</packaging>
+    <version>0.1.2-SNAPSHOT</version>
+
+    <name>Carat Heroku Glassfish Runner</name>
+    <url>http://www.yellowfire.co.za</url>
+
+    <properties>
+        <jdk.version>1.7</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <dependency.lombok.version>0.12.0</dependency.lombok.version>
+        <dependency.lombok.maven.version>0.11.8.0</dependency.lombok.maven.version>
+    </properties>
+
+    <dependencies>
+        <!--************************************************************************************************************
+             Ease
+        *************************************************************************************************************-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${dependency.lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--************************************************************************************************************
+             Infrastructure
+        *************************************************************************************************************-->
+        <dependency>
+            <groupId>org.glassfish.main.extras</groupId>
+            <artifactId>glassfish-embedded-web</artifactId>
+            <version>4.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--************************************************************************************************************
+             Infrastructure
+        *************************************************************************************************************-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>carat-glassfish-heroku</finalName>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>lombok-needs-tools-jar</id>
+            <activation>
+                <file>
+                    <exists>${java.home}/../lib/tools.jar</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok-maven-plugin</artifactId>
+                        <version>${dependency.lombok.maven.version}</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>sun.jdk</groupId>
+                                <artifactId>tools</artifactId>
+                                <version>${jdk.version}</version>
+                                <scope>system</scope>
+                                <systemPath>${java.home}/../lib/tools.jar</systemPath>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
