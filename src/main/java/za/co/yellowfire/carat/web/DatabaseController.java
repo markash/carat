@@ -27,6 +27,7 @@ public class DatabaseController {
         Flyway flyway = new Flyway();
         flyway.setDataSource(getDataSource());
         flyway.setLocations("classpath:db.migration.postgres");
+        flyway.setSchemas("base");
         flyway.setInitOnMigrate(true);
         return flyway.migrate();
     }
