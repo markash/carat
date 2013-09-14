@@ -1,0 +1,12 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/templates/main.xhtml">
+    <ui:define name="content">
+        <h:form id="f1" >
+            <h:messages id="messages" globalOnly="true" showDetail="true" showSummary="true" />
+            <h:commandButton id="clean" value="Clean" styleClass="btn btn-primary" actionListener="#{databaseController.onClean()}"/>
+            <h:commandButton id="migrate" value="Migrate" styleClass="btn btn-primary" actionListener="#{databaseController.onMigrate()}"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
