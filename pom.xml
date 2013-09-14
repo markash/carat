@@ -585,14 +585,15 @@
         </profile>
     </profiles>
 
+
     <repositories>
         <repository>
             <id>glassfish-releases</id>
             <url>http://download.java.net/maven/glassfish</url>
         </repository>
         <repository>
-            <id>yellowfire-local</id>
-            <url>file:${project.basedir}/repo</url>
+            <id>yellowfire-releases</id>
+            <url>http://www.yellowfire.co.za/repository</url>
         </repository>
     </repositories>
 </project>
