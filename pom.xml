@@ -58,6 +58,11 @@
             <artifactId>carat-glassfish-heroku</artifactId>
             <version>0.1.2-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.flyway</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>${dependency.flywaydb.version}</version>
+        </dependency>
         <!--************************************************************************************************************
              Testing
         *************************************************************************************************************-->

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -15,16 +16,18 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.omnifaces.util.Messages;
 import za.co.yellowfire.carat.db.Item;
 import za.co.yellowfire.carat.db.ItemDao;
+import za.co.yellowfire.carat.i18n.i18n;
 import za.co.yellowfire.carat.jsf.i18n.MessageFactory;
 
 @Named
 @ViewScoped @Slf4j
 public class IndexController implements Serializable {
 
-    @Inject
-    private ItemDao itemDao;
+    @Inject private ItemDao itemDao;
+    @Inject DatabaseController databaseController;
 
 //    @Inject @Metrics
 //    private MetricRegistry metricRegistry;
@@ -63,6 +66,15 @@ public class IndexController implements Serializable {
     public void onTitleUpdate(AjaxBehaviorEvent event) {
         System.out.println("event = " + event);
         System.out.println("event = " + getTitle());
+    }
+
+    @PostConstruct
+    public void onCreate() {
+        try {
+            databaseController.onMigrate();
+        } catch (Exception e) {
+            Messages.addGlobalError(i18n.error.db.migration, e.getMessage());
+        }
     }
 
     public void onSubmit() {
