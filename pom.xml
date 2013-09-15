@@ -114,6 +114,17 @@
         </pluginManagement>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <!-- Exclude the glassfish embedded environment that is coming from carat-glassfish -->
+                    <packagingExcludes>
+                        WEB-INF/lib/glassfish-embedded-web-4.0.jar,
+                        resource/img/*.xcf
+                    </packagingExcludes>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>1.8</version>
@@ -167,11 +178,11 @@
                         <version>${dependency.jetty9.version}</version>
                         <scope>runtime</scope>
                     </dependency>
-                    <dependency>
-                        <groupId>postgresql</groupId>
-                        <artifactId>postgresql</artifactId>
-                        <version>${dependency.postgres.version}</version>
-                    </dependency>
+                    <!--<dependency>-->
+                        <!--<groupId>postgresql</groupId>-->
+                        <!--<artifactId>postgresql</artifactId>-->
+                        <!--<version>${dependency.postgres.version}</version>-->
+                    <!--</dependency>-->
                     <dependency>
                         <groupId>com.atomikos</groupId>
                         <artifactId>transactions</artifactId>
