@@ -28,7 +28,8 @@
                             <span class="icon-bar"/>
                             <span class="icon-bar"/>
                         </button>
-                        <h:commandLink action="index" styleClass="navbar-brand">
+                        <h:commandLink value="#{initParam['za.co.yellowfire.carat.web.NAME']}" action="index" styleClass="navbar-brand" rendered="#{!initParam['za.co.yellowfire.carat.web.SHOW_LOGO']}" />
+                        <h:commandLink action="index" styleClass="navbar-brand" rendered="#{initParam['za.co.yellowfire.carat.web.SHOW_LOGO']}">
                             <h:graphicImage library="img" name="#{initParam['za.co.yellowfire.carat.web.LOGO']}" />
                         </h:commandLink>
                     </div>
